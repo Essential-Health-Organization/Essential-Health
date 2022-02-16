@@ -44,5 +44,17 @@ Resource_id BIGSERIAL NOT NULL PRIMARY KEY,
 Personal_Info_FK BIGINT REFERENCES Personal_Info(Personal_Info_id),
 Phone_Number VARCHAR(255) NOT NULL,
 Website VARCHAR(255) NOT NULL,
-Picture bytea 
+Picture bytea, 
+Location VARCHAR(255) NOT NULL,
+State VARCHAR(50) NOT NULL,
+Area_of_Expertise VARCHAR(255) NOT NULL
+);
+
+
+-- Resources and Personal Info table 
+
+CREATE TABLE Resources_and_Personal_Info(
+id BIGSERIAL NOT NULL PRIMARY KEY,
+Personal_Info_FK BIGINT REFERENCES Personal_Info(Personal_Info_id),
+Resources_Info_FK BIGINT REFERENCES Resources(Resource_id)
 );
