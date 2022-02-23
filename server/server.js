@@ -6,6 +6,8 @@ const cors = require("cors");
 //connecting to db
 const db = require("./db");
 
+// git pull origin main or branch name
+
 app.use(morgan("dev"));
 const port = process.env.PORT || 4001;
 // const jwt_key = process.env.JWT_KEY;
@@ -81,33 +83,38 @@ app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 });
 
 // Insert into personal info table
-app.post("/api/v1/PForm", async (req, res) => {
-	try {
-		const result = await db.query(
-			"INSERT INTO personal_info (first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING * ",
-			[
-				req.body.first_name,
-				req.body.last_name,
-				req.body.pronoun,
-				req.body.phone_number,
-				req.body.location,
-				req.body.state,
-				req.body.area_of_expertise,
-			]
-		);
+app.post(
+	"/api/v1/PForm/:login_credential_id_fk/:medical_info_id_fk",
+	async (req, res) => {
+		try {
+			const result = await db.query(
+				"INSERT INTO personal_info (login_credential_id_fk,medical_info_id_fk,first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING * ",
+				[
+					req.params.login_credential_id_fk,
+					req.params.medical_info_id_fk,
+					req.body.first_name,
+					req.body.last_name,
+					req.body.pronoun,
+					req.body.phone_number,
+					req.body.location,
+					req.body.state,
+					req.body.area_of_expertise,
+				]
+			);
 
-		console.log(req.body);
+			console.log(req.body);
 
-		res.status(201).json({
-			status: "success",
-			data: {
-				personal_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
+			res.status(201).json({
+				status: "success",
+				data: {
+					personal_information: result.rows[0], //this gets the one row we need
+				},
+			});
+		} catch (err) {
+			console.error(err.message);
+		}
 	}
-});
+);
 
 // updating user information
 
@@ -258,6 +265,3 @@ app.get("/api/v1/Res/:resource_id", async (req, res) => {
 app.listen(port, () => {
 	console.log(`the server is up ${port}`);
 });
-
-
-
