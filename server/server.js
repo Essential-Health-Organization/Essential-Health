@@ -60,7 +60,7 @@ app.post("/api/v1/SignUp", async (req, res) => {
 //to get a user
 app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 	try {
-		const { username, password } = req.body;
+		// const { username, password } = req.body;
 		const result = await db.query(
 			"SELECT (username,password) FROM login_credentials  WHERE login_credential_id= $1",
 			[req.params.login_credential_id]
@@ -87,7 +87,7 @@ app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 app.post("/api/v1/PForm", async (req, res) => {
 	try {
 		const result = await db.query(
-			"INSERT INTO personal_info (login_credential_id_fk,first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING * ",
+			"INSERT INTO personal_info (first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING * ",
 			[
                
 				req.body.first_name,
