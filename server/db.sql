@@ -26,8 +26,8 @@ Insurance varchar(50)
 
 CREATE TABLE Personal_Info(
 Personal_Info_id BIGSERIAL NOT NULL PRIMARY KEY,
-Login_Credential_ID_FK BIGINT REFERENCES Login_Credentials(Login_Credential_id),
-Medical_Info_ID_FK BIGINT REFERENCES Medical_Info(Medical_Info_id),
+Login_Credential_ID_FK NOT NULL BIGINT REFERENCES Login_Credentials(Login_Credential_id),
+Medical_Info_ID_FK NOT NULL BIGINT REFERENCES Medical_Info(Medical_Info_id),
 First_Name VARCHAR(50) NOT NULL,
 Last_Name VARCHAR(50) NOT NULL,
 Pronoun VARCHAR(50) NOT NULL,
@@ -87,3 +87,16 @@ VALUES ('Nursing Therapy','546-524-8891','NursingTherapy@gmail.com','205-221-654
 --population of resources and personal info table
 
 INSERT INTO resources_and_personal_info (personal_info_fk,resources_info_fk) VALUES (1,1);
+
+
+-- adding cascading to foriegn key personal info for the login_credentials foreign key
+ALTER TABLE personal_info
+ADD CONSTRAINT fk_login_personal FOREIGN KEY(login_credential_id_fk)
+REFERENCES login_credentials(login_credential_id)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- adding cascading to foriegn key personal info for the medical_info foreign key
+ALTER TABLE personal_info
+ADD CONSTRAINT fk_medical_personal FOREIGN KEY(medical_info_id_fk)
+REFERENCES medical_info(medical_info_id)
+ON DELETE CASCADE ON UPDATE CASCADE;

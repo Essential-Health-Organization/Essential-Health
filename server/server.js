@@ -8,10 +8,12 @@ const db = require("./db");
 
 app.use(morgan("dev"));
 const port = process.env.PORT || 3001;
+// const jwt_key = process.env.JWT_KEY;
 
 //middleware
 app.use(cors());
 app.use(express.json());
+
 
 // ROUTES
 //get one message // this is one route to get one message
@@ -57,18 +59,16 @@ app.post("/api/v1/SignUp", async (req, res) => {
 		console.error(err.message);
 	}
 });
+
 //to get a user
 app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 	try {
-		// const { username, password } = req.body;
 		const result = await db.query(
-			"SELECT (username,password) FROM login_credentials  WHERE login_credential_id= $1",
+			"SELECT username,password FROM login_credentials WHERE login_credential_id = $1 ",
 			[req.params.login_credential_id]
 		);
 
-		// console.log(req.body);
-
-		//now we want to make sure that if that user does exist we need to make a validator
+		console.log(req.params);
 
 		// console.log(result.rows[0]);
 		res.status(201).json({
@@ -83,13 +83,11 @@ app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 });
 
 // Insert into personal info table
-
 app.post("/api/v1/PForm", async (req, res) => {
 	try {
 		const result = await db.query(
 			"INSERT INTO personal_info (first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING * ",
 			[
-               
 				req.body.first_name,
 				req.body.last_name,
 				req.body.pronoun,
@@ -144,7 +142,6 @@ app.put("/api/v1/PForm/", async (req, res) => {
 	}
 });
 
-
 // geting personal information
 app.get("/api/v1/PForm/:personal_info_id", async (req, res) => {
 	try {
@@ -165,7 +162,6 @@ app.get("/api/v1/PForm/:personal_info_id", async (req, res) => {
 		console.error(err.message);
 	}
 });
-
 
 // inserting into medical information
 app.post("/api/v1/MForm", async (req, res) => {
