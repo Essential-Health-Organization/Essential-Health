@@ -9,12 +9,13 @@ const db = require("./db");
 // git pull origin main or branch name
 
 app.use(morgan("dev"));
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 3001;
 // const jwt_key = process.env.JWT_KEY;
 
 //middleware
 app.use(cors());
 app.use(express.json());
+
 
 // ROUTES
 //get one message // this is one route to get one message
@@ -71,6 +72,7 @@ app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 
 		console.log(req.params);
 
+		// console.log(result.rows[0]);
 		res.status(201).json({
 			status: "success",
 			data: {
