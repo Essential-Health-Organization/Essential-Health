@@ -83,7 +83,7 @@ app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 });
 
 // Insert into personal info table
-app.post("/api/v1/PForm", async (req, res) => {
+app.post("/api/v1/:id/PForm", async (req, res) => {
 	try {
 		const result = await db.query(
 			"INSERT INTO personal_info (first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING * ",
@@ -113,7 +113,7 @@ app.post("/api/v1/PForm", async (req, res) => {
 
 // updating user information
 
-app.put("/api/v1/PForm/", async (req, res) => {
+app.put("/api/v1/PForm", async (req, res) => {
 	try {
 		const result = await db.query(
 			"UPDATE personal_info SET first_name=$1, last_name= $2, pronoun = $3, phone_number = $4, location=$5 , state = $6, area_of_expertise = $7 WHERE personal_info_id=$8 RETURNING * ",
