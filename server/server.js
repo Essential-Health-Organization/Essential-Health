@@ -116,15 +116,11 @@ app.post("/api/v1/PForm/:username", async (req, res) => {
 	}
 });
 
-// updating user information
-// '${req.body.email}'
-
-app.put("/api/v1/PForm/:username", async (req, res) => {
+app.put("/api/v1/PForm/update/:username", async (req, res) => {
 	try {
 		const result = await db.query(
-			"UPDATE personal_info SET first_name=$1,last_name=$2,pronoun=$3,area_of_expertise=$4,phone_number=$5,city=$6,state=$7,zip=$8 WHERE username=$9 RETURNING * ",
+			"UPDATE personal_info SET first_name=$1,last_name=$2,pronoun=$3,area_of_expertise=$4,phone_number=$5,city=$6,state=$7,zip=$8 WHERE username = $9 RETURNING * ",
 			[
-				req.params.username,
 				req.body.first_name,
 				req.body.last_name,
 				req.body.pronoun,
@@ -133,6 +129,7 @@ app.put("/api/v1/PForm/:username", async (req, res) => {
 				req.body.city,
 				req.body.state,
 				req.body.zip,
+				req.params.username,
 			]
 		);
 
@@ -149,12 +146,12 @@ app.put("/api/v1/PForm/:username", async (req, res) => {
 	}
 });
 
-// geting personal information
-app.get("/api/v1/PForm/:personal_info_id", async (req, res) => {
+//geting personal information GOOD
+app.get("/api/v1/PForm/:username", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT * FROM personal_info WHERE personal_info_id=$1 ",
-			[req.params.personal_info_id]
+			"SELECT * FROM personal_info WHERE username=$1 ",
+			[req.params.username]
 		);
 
 		console.log(req.params);
@@ -170,12 +167,14 @@ app.get("/api/v1/PForm/:personal_info_id", async (req, res) => {
 	}
 });
 
-// inserting into medical information
-app.post("/api/v1/MForm", async (req, res) => {
+//good
+// inserting into medical information GOOD
+app.post("/api/v1/MForm/:username", async (req, res) => {
 	try {
 		const result = await db.query(
-			"INSERT INTO medical_info (any_medication,medication_description,insurance) VALUES($1,$2,$3) RETURNING * ",
+			"INSERT INTO medical_info (username,any_medication,medication_description,insurance) VALUES($1,$2,$3,$4) RETURNING * ",
 			[
+				req.params.username,
 				req.body.any_medication,
 				req.body.medication_description,
 				req.body.insurance,
@@ -195,16 +194,16 @@ app.post("/api/v1/MForm", async (req, res) => {
 	}
 });
 
-// updating the medical information
-app.put("/api/v1/MForm", async (req, res) => {
+// updating the medical information good
+app.put("/api/v1/MForm/update/:username", async (req, res) => {
 	try {
 		const result = await db.query(
-			"UPDATE medical_info SET any_medication = $1, medication_description = $2, insurance = $3 WHERE medical_info_id = $4 RETURNING * ",
+			"UPDATE medical_info SET any_medication = $1, medication_description = $2, insurance = $3 WHERE username = $4 RETURNING * ",
 			[
 				req.body.any_medication,
 				req.body.medication_description,
 				req.body.insurance,
-				req.body.medical_info_id,
+				req.params.username,
 			]
 		);
 
@@ -221,12 +220,12 @@ app.put("/api/v1/MForm", async (req, res) => {
 	}
 });
 
-// inserting into medical information
-app.get("/api/v1/MForm/:medical_info_id", async (req, res) => {
+// retrieve into medical information Good
+app.get("/api/v1/MForm/:username", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT * FROM medical_info WHERE medical_info_id=$1 ",
-			[req.params.medical_info_id]
+			"SELECT * FROM medical_info WHERE username=$1 ",
+			[req.params.username]
 		);
 
 		console.log(req.params);
@@ -244,11 +243,11 @@ app.get("/api/v1/MForm/:medical_info_id", async (req, res) => {
 
 // getting the resources
 
-app.get("/api/v1/Res/:resource_id", async (req, res) => {
+app.get("/api/v1/Res/:username", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT * FROM resources WHERE resource_id=$1 ",
-			[req.params.resource_id]
+			"SELECT * FROM resources INNER JOIN personal_info on resources.state=personal_info.state WHERE username= $1;",
+			[req.params.username]
 		);
 
 		console.log(req.params);

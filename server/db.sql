@@ -150,7 +150,7 @@ CREATE TABLE Medical_Info(
 Medical_Info_id BIGSERIAL NOT NULL,
 Username VARCHAR(255) NOT NULL REFERENCES Login_Credentials(Username),
 Any_Medication VARCHAR(20) NOT NULL,
-Medical_Description VARCHAR(255) NOT NULL,
+Medication_Description VARCHAR(255) NOT NULL,
 Insurance VARCHAR(255) NOT NULL,
 PRIMARY KEY (Medical_Info_id,Username)
 );
