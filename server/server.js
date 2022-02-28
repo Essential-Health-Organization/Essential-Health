@@ -6,6 +6,8 @@ const cors = require("cors");
 //connecting to db
 const db = require("./db");
 
+// git pull origin main or branch name
+
 app.use(morgan("dev"));
 const port = process.env.PORT || 3001;
 // const jwt_key = process.env.JWT_KEY;
@@ -13,7 +15,6 @@ const port = process.env.PORT || 3001;
 //middleware
 app.use(cors());
 app.use(express.json());
-
 
 // ROUTES
 //get one message // this is one route to get one message
@@ -60,7 +61,55 @@ app.post("/api/v1/SignUp", async (req, res) => {
 	}
 });
 
-//to get a user
+// login we need to validate a user
+
+app.post("/api/v1/Login", async (req, res) => {
+	try {
+		const result = await db.query(
+			`SELECT email,password FROM login_credentials WHERE email = '${req.body.email}' AND password = '${req.body.password}'`
+		);
+
+		console.log(req.body);
+		con.query(sql, function (err, results, fields) {
+			//if err with the sql err
+			if (err) {
+				console.log(err);
+				throw err;
+			} else {
+				// else if the results.length ===0 then the user does not exist
+				if (results.length === 0) {
+					x = "error not found";
+					return x;
+				}
+	
+				console.log(results);
+				//results 0 gets the customer id from the db
+				//const customerID = results[0].customerID;
+	
+				///const sql = `INSERT INTO sessions(user_id, session_token) VALUES (${customerID}, '${req.sessionID}')`;
+				con.query(sql, (err) => {
+					if (err) {
+						console.log(err);
+						throw err;
+					} else {
+						//res.redirect("/");
+					}
+				});
+			}
+		});
+		// console.log(result.rows[0]);
+		res.status(201).json({
+			status: "success",
+			data: {
+				login: result.rows[0], //this gets the one row we need
+			},
+		});
+	} catch (err) {
+		console.error(err.message);
+	}
+});
+
+//to get a user // not sure if we need this 
 app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 	try {
 		const result = await db.query(
@@ -69,6 +118,8 @@ app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 		);
 
 		console.log(req.params);
+
+
 
 		// console.log(result.rows[0]);
 		res.status(201).json({
@@ -83,33 +134,38 @@ app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 });
 
 // Insert into personal info table
-app.post("/api/v1/:id/PForm", async (req, res) => {
-	try {
-		const result = await db.query(
-			"INSERT INTO personal_info (first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING * ",
-			[
-				req.body.first_name,
-				req.body.last_name,
-				req.body.pronoun,
-				req.body.phone_number,
-				req.body.location,
-				req.body.state,
-				req.body.area_of_expertise,
-			]
-		);
+app.post(
+	"/api/v1/PForm/:login_credential_id_fk/:medical_info_id_fk",
+	async (req, res) => {
+		try {
+			const result = await db.query(
+				"INSERT INTO personal_info (login_credential_id_fk,medical_info_id_fk,first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING * ",
+				[
+					req.params.login_credential_id_fk,
+					req.params.medical_info_id_fk,
+					req.body.first_name,
+					req.body.last_name,
+					req.body.pronoun,
+					req.body.phone_number,
+					req.body.location,
+					req.body.state,
+					req.body.area_of_expertise,
+				]
+			);
 
-		console.log(req.body);
+			console.log(req.body);
 
-		res.status(201).json({
-			status: "success",
-			data: {
-				personal_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
+			res.status(201).json({
+				status: "success",
+				data: {
+					personal_information: result.rows[0], //this gets the one row we need
+				},
+			});
+		} catch (err) {
+			console.error(err.message);
+		}
 	}
-});
+);
 
 // updating user information
 
@@ -164,11 +220,12 @@ app.get("/api/v1/PForm/:personal_info_id", async (req, res) => {
 });
 
 // inserting into medical information
-app.post("/api/v1/MForm", async (req, res) => {
+app.post("/api/v1/MForm/:login_credential_id_fk", async (req, res) => {
 	try {
 		const result = await db.query(
 			"INSERT INTO medical_info (any_medication,medication_description,insurance) VALUES($1,$2,$3) RETURNING * ",
 			[
+				req.params.login_credential_id_fk,
 				req.body.any_medication,
 				req.body.medication_description,
 				req.body.insurance,
@@ -189,7 +246,7 @@ app.post("/api/v1/MForm", async (req, res) => {
 });
 
 // updating the medical information
-app.put("/api/v1/MForm", async (req, res) => {
+app.put("/api/v1/MForm/", async (req, res) => {
 	try {
 		const result = await db.query(
 			"UPDATE medical_info SET any_medication = $1, medication_description = $2, insurance = $3 WHERE medical_info_id = $4 RETURNING * ",

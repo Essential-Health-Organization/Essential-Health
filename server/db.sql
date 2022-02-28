@@ -100,3 +100,96 @@ ALTER TABLE personal_info
 ADD CONSTRAINT fk_medical_personal FOREIGN KEY(medical_info_id_fk)
 REFERENCES medical_info(medical_info_id)
 ON DELETE CASCADE ON UPDATE CASCADE;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--New Tables
+
+
+-- Roles Table
+
+CREATE TABLE Roles(
+	Role_id BIGSERIAL NOT NULL PRIMARY KEY,
+	Role_desc VARCHAR(255) NOT NULL
+);
+
+-- Login Credentials
+CREATE TABLE Login_Credentials(
+Username VARCHAR(255) NOT NULL PRIMARY KEY,
+Email VARCHAR(255) NOT NULL,
+Password VARCHAR(255) NOT NULL,
+Activation_Status VARCHAR(255),
+Deactivation_Date DATE,
+Role_id_fk BIGINT NOT NULL REFERENCES Roles(Role_id)	
+);
+
+--  Insperational Messages Table
+
+CREATE TABLE Insperational_Messages(
+Insperational_Message_id BIGSERIAL NOT NULL PRIMARY KEY,
+Insperational_message VARCHAR(255) NOT NULL
+);
+
+-- Personal Information Table
+CREATE TABLE Personal_Info(
+Username VARCHAR(255) NOT NULL REFERENCES Login_Credentials(Username),
+First_Name VARCHAR(55) NOT NULL,
+Last_Name VARCHAR(55) NOT NULL,
+Pronoun VARCHAR(55) NOT NULL,
+Area_of_Expertise VARCHAR(55) NOT NULL,
+Phone_Number VARCHAR(55) NOT NULL,
+City VARCHAR(55) NOT NULL,
+State VARCHAR(55) NOT NULL,
+Zip VARCHAR(12) NOT NULL,
+PRIMARY KEY (Username)
+);
+
+-- Medical Info Table
+CREATE TABLE Medical_Info(
+Medical_Info_id BIGSERIAL NOT NULL,
+Username VARCHAR(255) NOT NULL REFERENCES Login_Credentials(Username),
+Any_Medication VARCHAR(20) NOT NULL,
+Medical_Description VARCHAR(255) NOT NULL,
+Insurance VARCHAR(255) NOT NULL,
+PRIMARY KEY (Medical_Info_id,Username)
+);
+
+-- Resources Table
+CREATE TABLE Resources(
+Resource_id BIGSERIAL NOT NULL,
+Username VARCHAR(255) NOT NULL REFERENCES Login_Credentials(Username),
+Title VARCHAR(255) NOT NULL,
+Fax VARCHAR(255) NOT NULL,
+Email VARCHAR(255) NOT NULL,
+Phone_Number VARCHAR(50) NOT NULL,
+Description VARCHAR(255) NOT NULL,
+Website VARCHAR(255) NOT NULL,
+Picture bytea,
+City VARCHAR(50) NOT NULL,
+State VARCHAR(50) NOT NULL,
+Zip VARCHAR(12) NOT NULL,
+Area_of_Expertise VARCHAR(255) NOT NULL,	
+PRIMARY KEY (Resource_id,Username)
+);
+
+--------------------------------------------------------------------------
+
+--Insert Insperational Message
+INSERT INTO insperational_messages(insperational_message) VALUES ('Insperational Message Number One');
+
+-- Insert into Login_Credentials
+
+INSERT INTO Login_Credentials(username,email,password,activation_status) VALUES ('Bobby','bobby34@gmail.com','jello123','active');
+
+-- Insert into Personal_Info
+INSERT INTO Personal_Info(username,first_name,last_name,pronoun,area_of_expertise,phone_number,city,state,zip) VALUES ('Bobby','Bob','Lee','He/Him','Computer Scientist','347-522-6321','Brooklyn','New York','11216');
+
+-- Insert into Medical_Info
+INSERT INTO medical_info(username,any_medication,medical_description,insurance) VALUES ('Bobby','Yes','Flovent','Fidelis');
+
+--Insert into resources 
+INSERT INTO resources(username,title,fax,email,phone_number,description,website,picture,city,state,zip,area_of_expertise) VALUES ('Bobby','Laura Croft','347-227-1345','Laura@gmail.com','347-221-2510','this is a therapy for computer science','lauratherapy.com','','New York','New York','10001','computer science');
+
+
+
+
+
