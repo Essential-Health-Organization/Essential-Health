@@ -24,10 +24,11 @@ Insurance varchar(50)
 
 -- Personal Information Table
 
+
 CREATE TABLE Personal_Info(
 Personal_Info_id BIGSERIAL NOT NULL PRIMARY KEY,
-Login_Credential_ID_FK NOT NULL BIGINT REFERENCES Login_Credentials(Login_Credential_id),
-Medical_Info_ID_FK NOT NULL BIGINT REFERENCES Medical_Info(Medical_Info_id),
+Login_Credential_ID_FK BIGINT NOT NULL REFERENCES login_credentials(login_credential_id),
+Medical_Info_ID_FK BIGINT NOT NULL REFERENCES Medical_Info(Medical_Info_id),
 First_Name VARCHAR(50) NOT NULL,
 Last_Name VARCHAR(50) NOT NULL,
 Pronoun VARCHAR(50) NOT NULL,
@@ -119,6 +120,7 @@ Email VARCHAR(255) NOT NULL,
 Password VARCHAR(255) NOT NULL,
 Activation_Status VARCHAR(255),
 Deactivation_Date DATE,
+UNIQUE(Username,Email)
 Role_id_fk BIGINT NOT NULL REFERENCES Roles(Role_id)	
 );
 

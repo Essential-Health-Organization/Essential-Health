@@ -16,11 +16,10 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-
 // ROUTES
 //get one message // this is one route to get one message
 
-// insperational_messages route
+// insperational_messages route good
 app.get("/api/v1/message/:insperational_message_id", async (req, res) => {
 	try {
 		const getOneMessage = await db.query(
@@ -41,13 +40,13 @@ app.get("/api/v1/message/:insperational_message_id", async (req, res) => {
 	}
 });
 
-// login
+// login good,
 // insert into
 app.post("/api/v1/SignUp", async (req, res) => {
 	try {
 		const result = await db.query(
-			"INSERT INTO login_credentials (email,username,password) VALUES($1,$2,$3) RETURNING *",
-			[req.body.email, req.body.username, req.body.password]
+			"INSERT INTO login_credentials (username,email,password) VALUES($1,$2,$3) RETURNING *",
+			[req.body.username, req.body.email, req.body.password]
 		);
 		console.log(req.body);
 
@@ -62,21 +61,54 @@ app.post("/api/v1/SignUp", async (req, res) => {
 	}
 });
 
-//to get a user
-app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
+//good
+//to get a user, maybe will change  to post later on, we need to implement validation g
+// app.get("/api/v1/Login", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			`SELECT email,password FROM login_credentials WHERE email = '${req.body.email}'`
+// 		);
+
+// 		console.log(req.body);
+
+// 		// console.log(result.rows[0]);
+// 		res.status(201).json({
+// 			status: "success",
+// 			data: {
+// 				login: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
+
+//good
+// Insert into personal info table,need to fix vulnerability risk
+//login credential = 2 medical info = 4
+app.post("/api/v1/PForm/:username", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT username,password FROM login_credentials WHERE login_credential_id = $1 ",
-			[req.params.login_credential_id]
+			"INSERT INTO personal_info (username,first_name,last_name,pronoun,area_of_expertise,phone_number,city,state,zip) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING * ",
+			[
+				req.params.username,
+				req.body.first_name,
+				req.body.last_name,
+				req.body.pronoun,
+				req.body.area_of_expertise,
+				req.body.phone_number,
+				req.body.city,
+				req.body.state,
+				req.body.zip,
+			]
 		);
 
-		console.log(req.params);
+		console.log(req.body);
 
-		// console.log(result.rows[0]);
 		res.status(201).json({
 			status: "success",
 			data: {
-				login: result.rows[0], //this gets the one row we need
+				personal_information: result.rows[0], //this gets the one row we need
 			},
 		});
 	} catch (err) {
@@ -84,55 +116,23 @@ app.get("/api/v1/Login/:login_credential_id", async (req, res) => {
 	}
 });
 
-// Insert into personal info table
-app.post(
-	"/api/v1/PForm/:login_credential_id_fk/:medical_info_id_fk",
-	async (req, res) => {
-		try {
-			const result = await db.query(
-				"INSERT INTO personal_info (login_credential_id_fk,medical_info_id_fk,first_name,last_name,pronoun,phone_number,location,state,area_of_expertise) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING * ",
-				[
-					req.params.login_credential_id_fk,
-					req.params.medical_info_id_fk,
-					req.body.first_name,
-					req.body.last_name,
-					req.body.pronoun,
-					req.body.phone_number,
-					req.body.location,
-					req.body.state,
-					req.body.area_of_expertise,
-				]
-			);
-
-			console.log(req.body);
-
-			res.status(201).json({
-				status: "success",
-				data: {
-					personal_information: result.rows[0], //this gets the one row we need
-				},
-			});
-		} catch (err) {
-			console.error(err.message);
-		}
-	}
-);
-
 // updating user information
+// '${req.body.email}'
 
-app.put("/api/v1/PForm/", async (req, res) => {
+app.put("/api/v1/PForm/:username", async (req, res) => {
 	try {
 		const result = await db.query(
-			"UPDATE personal_info SET first_name=$1, last_name= $2, pronoun = $3, phone_number = $4, location=$5 , state = $6, area_of_expertise = $7 WHERE personal_info_id=$8 RETURNING * ",
+			"UPDATE personal_info SET first_name=$1,last_name=$2,pronoun=$3,area_of_expertise=$4,phone_number=$5,city=$6,state=$7,zip=$8 WHERE username=$9 RETURNING * ",
 			[
+				req.params.username,
 				req.body.first_name,
 				req.body.last_name,
 				req.body.pronoun,
-				req.body.phone_number,
-				req.body.location,
-				req.body.state,
 				req.body.area_of_expertise,
-				req.body.personal_info_id,
+				req.body.phone_number,
+				req.body.city,
+				req.body.state,
+				req.body.zip,
 			]
 		);
 
