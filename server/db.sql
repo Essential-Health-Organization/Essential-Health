@@ -120,8 +120,8 @@ Email VARCHAR(255) NOT NULL,
 Password VARCHAR(255) NOT NULL,
 Activation_Status VARCHAR(255),
 Deactivation_Date DATE,
-UNIQUE(Username,Email)
-Role_id_fk BIGINT NOT NULL REFERENCES Roles(Role_id)	
+UNIQUE(Username,Email),
+Role_id_fk BIGINT REFERENCES Roles(Role_id)	
 );
 
 --  Insperational Messages Table
@@ -158,7 +158,6 @@ PRIMARY KEY (Medical_Info_id,Username)
 -- Resources Table
 CREATE TABLE Resources(
 Resource_id BIGSERIAL NOT NULL,
-Username VARCHAR(255) NOT NULL REFERENCES Login_Credentials(Username),
 Title VARCHAR(255) NOT NULL,
 Fax VARCHAR(255) NOT NULL,
 Email VARCHAR(255) NOT NULL,
@@ -170,7 +169,7 @@ City VARCHAR(50) NOT NULL,
 State VARCHAR(50) NOT NULL,
 Zip VARCHAR(12) NOT NULL,
 Area_of_Expertise VARCHAR(255) NOT NULL,	
-PRIMARY KEY (Resource_id,Username)
+PRIMARY KEY (Resource_id)
 );
 
 --------------------------------------------------------------------------
@@ -186,10 +185,10 @@ INSERT INTO Login_Credentials(username,email,password,activation_status) VALUES 
 INSERT INTO Personal_Info(username,first_name,last_name,pronoun,area_of_expertise,phone_number,city,state,zip) VALUES ('Bobby','Bob','Lee','He/Him','Computer Scientist','347-522-6321','Brooklyn','New York','11216');
 
 -- Insert into Medical_Info
-INSERT INTO medical_info(username,any_medication,medical_description,insurance) VALUES ('Bobby','Yes','Flovent','Fidelis');
+INSERT INTO medical_info(username,any_medication,medication_description,insurance) VALUES ('Bobby','Yes','Flovent','Fidelis');
 
 --Insert into resources 
-INSERT INTO resources(username,title,fax,email,phone_number,description,website,picture,city,state,zip,area_of_expertise) VALUES ('Bobby','Laura Croft','347-227-1345','Laura@gmail.com','347-221-2510','this is a therapy for computer science','lauratherapy.com','','New York','New York','10001','computer science');
+INSERT INTO resources(title,fax,email,phone_number,description,website,picture,city,state,zip,area_of_expertise) VALUES ('Laura Croft','347-227-1345','Laura@gmail.com','347-221-2510','this is a therapy for computer science','lauratherapy.com','','New York','New York','10001','computer science');
 
 
 
