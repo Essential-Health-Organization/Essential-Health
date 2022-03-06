@@ -22,6 +22,10 @@ app.use(express.json());
 
 app.use("/auth", require("./routes/jwtAuth"));
 
+//Home
+
+app.use("/home", require("./routes/home"));
+
 //get one message // this is one route to get one message
 // insperational_messages route good
 app.get("/api/v1/message/:insperational_message_id", async (req, res) => {
