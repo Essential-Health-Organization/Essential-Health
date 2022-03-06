@@ -83,11 +83,11 @@ INSERT INTO insperational_messages(insperational_message) VALUES ('Insperational
 INSERT INTO Login_Credentials(Username,email,password,activation_status) VALUES ('Bobby','bobby34@gmail.com','jello123','active');
 
 --copy and past the uuid generated in Login_Credentials from when inserting User_id
-INSERT INTO Personal_Info(User_id,first_name,last_name,pronoun,Occupation,phone_number,city,state,zip) VALUES ('b6b8cc0e-795a-4d8e-b99c-7a916e1721c1','Bob','Lee','He/Him','Computer Scientist','347-522-6321','Brooklyn','New York','11216');
+INSERT INTO Personal_Info(User_id,first_name,last_name,pronoun,Occupation,phone_number,city,state,zip) VALUES ('36690555-1b84-43b1-82e7-91a307bed675','Bob','Lee','He/Him','Computer Scientist','347-522-6321','Brooklyn','New York','11216');
 
-INSERT INTO medical_info(User_id,any_medication,medication_description,insurance) VALUES ('b6b8cc0e-795a-4d8e-b99c-7a916e1721c1','Yes','Flovent','Fidelis');
+INSERT INTO medical_info(User_id,any_medication,medication_description,insurance) VALUES ('36690555-1b84-43b1-82e7-91a307bed675','Yes','Flovent','Fidelis');
 
 INSERT INTO resources(title,fax,email,phone_number,description,website,picture,city,state,zip,Occupation) VALUES ('Laura Croft','347-227-1345','Laura@gmail.com','347-221-2510','this is a therapy for computer science','lauratherapy.com','','New York','New York','10001','computer science');
 
-INSERT INTO User_Saved_Resources(User_id,title,fax,email,phone_number,description,website,picture,city,state,zip,Occupation) VALUES ('b6b8cc0e-795a-4d8e-b99c-7a916e1721c1','Laura Croft','347-227-1345','Laura@gmail.com','347-221-2510','this is a therapy for computer science','lauratherapy.com','','New York','New York','10001','computer science');
+INSERT INTO User_Saved_Resources(User_id,title,fax,email,phone_number,description,website,picture,city,state,zip,Occupation) VALUES ('36690555-1b84-43b1-82e7-91a307bed675','Laura Croft','347-227-1345','Laura@gmail.com','347-221-2510','this is a therapy for computer science','lauratherapy.com','','New York','New York','10001','computer science');
 

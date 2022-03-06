@@ -16,6 +16,19 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+//routes register and login routes
+app.use("/auth", require("./routes/jwtAuth"));
+
+
+//Home
+app.use("/home",require("./routes/home"))
+
+
+
+
+
+
+
 // ROUTES
 //get one message // this is one route to get one message
 
