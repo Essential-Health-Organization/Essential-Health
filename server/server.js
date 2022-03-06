@@ -17,8 +17,12 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
-//get one message // this is one route to get one message
 
+//register and login routes
+
+app.use("/auth", require("./routes/jwtAuth"));
+
+//get one message // this is one route to get one message
 // insperational_messages route good
 app.get("/api/v1/message/:insperational_message_id", async (req, res) => {
 	try {
