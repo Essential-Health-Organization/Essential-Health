@@ -27,155 +27,22 @@ app.use("/auth", require("./routes/jwtAuth"));
 app.use("/home", require("./routes/home"));
 
 //get one message // this is one route to get one message
+
 // insperational_messages route good
-app.get("/api/v1/message/:insperational_message_id", async (req, res) => {
-	try {
-		const getOneMessage = await db.query(
-			"SELECT * FROM insperational_messages  WHERE insperational_message_id = $1",
-			[req.params.insperational_message_id]
-		);
-		// console.log(getOneMessage.rows[0]);
-		// console.log(req);
-		res.status(200).json({
-			// to send a good status
-			status: "success", // of success
-			data: {
-				message: getOneMessage.rows[0],
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
-
-// login good,
-// insert into
-app.post("/api/v1/SignUp", async (req, res) => {
-	try {
-		const result = await db.query(
-			"INSERT INTO login_credentials (username,email,password) VALUES($1,$2,$3) RETURNING *",
-			[req.body.username, req.body.email, req.body.password]
-		);
-		console.log(req.body);
-
-		res.status(201).json({
-			status: "success",
-			data: {
-				login: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+app.use("/message", require("./routes/message"));
 
 //good
-//to get a user, maybe will change  to post later on, we need to implement validation g
-// app.get("/api/v1/Login", async (req, res) => {
-// 	try {
-// 		const result = await db.query(
-// 			`SELECT email,password FROM login_credentials WHERE email = '${req.body.email}'`
-// 		);
 
-// 		console.log(req.body);
-
-// 		// console.log(result.rows[0]);
-// 		res.status(201).json({
-// 			status: "success",
-// 			data: {
-// 				login: result.rows[0], //this gets the one row we need
-// 			},
-// 		});
-// 	} catch (err) {
-// 		console.error(err.message);
-// 	}
-// });
-
-//good
-// Insert into personal info table,need to fix vulnerability risk
-//login credential = 2 medical info = 4
-app.post("/api/v1/PForm/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"INSERT INTO personal_info (username,first_name,last_name,pronoun,area_of_expertise,phone_number,city,state,zip) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING * ",
-			[
-				req.params.username,
-				req.body.first_name,
-				req.body.last_name,
-				req.body.pronoun,
-				req.body.area_of_expertise,
-				req.body.phone_number,
-				req.body.city,
-				req.body.state,
-				req.body.zip,
-			]
-		);
-
-		console.log(req.body);
-
-		res.status(201).json({
-			status: "success",
-			data: {
-				personal_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
-
-app.put("/api/v1/PForm/update/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"UPDATE personal_info SET first_name=$1,last_name=$2,pronoun=$3,area_of_expertise=$4,phone_number=$5,city=$6,state=$7,zip=$8 WHERE username = $9 RETURNING * ",
-			[
-				req.body.first_name,
-				req.body.last_name,
-				req.body.pronoun,
-				req.body.area_of_expertise,
-				req.body.phone_number,
-				req.body.city,
-				req.body.state,
-				req.body.zip,
-				req.params.username,
-			]
-		);
-
-		console.log(req.body);
-
-		res.status(200).json({
-			status: "success",
-			data: {
-				personal_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+app.use("/pform", require("./routes/personalform"));
 
 //geting personal information GOOD
-app.get("/api/v1/PForm/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"SELECT * FROM personal_info WHERE username=$1 ",
-			[req.params.username]
-		);
-
-		console.log(req.params);
-
-		res.status(200).json({
-			status: "success",
-			data: {
-				personal_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
-
 //good
+
+app.use("/mform", require("./routes/medicalform"));
+
+//resources
+app.use("/results", require("./routes/results"));
+
 // inserting into medical information GOOD
 app.post("/api/v1/MForm/:username", async (req, res) => {
 	try {
