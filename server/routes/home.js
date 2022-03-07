@@ -10,7 +10,7 @@ router.get("/",authorization,async(req,res)=>{
     try {
         //req.user has the payload
         // res.json(req.user)
-        const user = await pool.query("SELECT username FROM login_credentials WHERE user_id = $1",[req.user])
+        const user = await pool.query("SELECT * FROM login_credentials WHERE user_id = $1",[req.user])
         res.json(user.rows[0])
         
     } catch (err) {

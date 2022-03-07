@@ -24,55 +24,61 @@ app.use("/auth", require("./routes/jwtAuth"));
 app.use("/home",require("./routes/home"))
 
 
+app.use("/message",require("./routes/message"))
 
+app.use("/pform",require("./routes/personalform"))
 
+app.use("/mform",require("./routes/medicalform"))
 
+app.use("/results",require("./routes/results"))
+
+//app.use("/pformupdate",require("./routes/personalform"))
 
 
 // ROUTES
 //get one message // this is one route to get one message
 
 // insperational_messages route good
-app.get("/api/v1/message/:insperational_message_id", async (req, res) => {
-	try {
-		const getOneMessage = await db.query(
-			"SELECT * FROM insperational_messages  WHERE insperational_message_id = $1",
-			[req.params.insperational_message_id]
-		);
-		// console.log(getOneMessage.rows[0]);
-		// console.log(req);
-		res.status(200).json({
-			// to send a good status
-			status: "success", // of success
-			data: {
-				message: getOneMessage.rows[0],
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// app.get("/api/v1/message/:insperational_message_id", async (req, res) => {
+// 	try {
+// 		const getOneMessage = await db.query(
+// 			"SELECT * FROM insperational_messages  WHERE insperational_message_id = $1",
+// 			[req.params.insperational_message_id]
+// 		);
+// 		// console.log(getOneMessage.rows[0]);
+// 		// console.log(req);
+// 		res.status(200).json({
+// 			// to send a good status
+// 			status: "success", // of success
+// 			data: {
+// 				message: getOneMessage.rows[0],
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
 // login good,
 // insert into
-app.post("/api/v1/SignUp", async (req, res) => {
-	try {
-		const result = await db.query(
-			"INSERT INTO login_credentials (username,email,password) VALUES($1,$2,$3) RETURNING *",
-			[req.body.username, req.body.email, req.body.password]
-		);
-		console.log(req.body);
+// app.post("/api/v1/SignUp", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			"INSERT INTO login_credentials (username,email,password) VALUES($1,$2,$3) RETURNING *",
+// 			[req.body.username, req.body.email, req.body.password]
+// 		);
+// 		console.log(req.body);
 
-		res.status(201).json({
-			status: "success",
-			data: {
-				login: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// 		res.status(201).json({
+// 			status: "success",
+// 			data: {
+// 				login: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
 //good
 //to get a user, maybe will change  to post later on, we need to implement validation g
@@ -99,160 +105,160 @@ app.post("/api/v1/SignUp", async (req, res) => {
 //good
 // Insert into personal info table,need to fix vulnerability risk
 //login credential = 2 medical info = 4
-app.post("/api/v1/PForm/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"INSERT INTO personal_info (username,first_name,last_name,pronoun,area_of_expertise,phone_number,city,state,zip) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING * ",
-			[
-				req.params.username,
-				req.body.first_name,
-				req.body.last_name,
-				req.body.pronoun,
-				req.body.area_of_expertise,
-				req.body.phone_number,
-				req.body.city,
-				req.body.state,
-				req.body.zip,
-			]
-		);
+// app.post("/api/v1/PForm/:username", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			"INSERT INTO personal_info (username,first_name,last_name,pronoun,area_of_expertise,phone_number,city,state,zip) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING * ",
+// 			[
+// 				req.params.username,
+// 				req.body.first_name,
+// 				req.body.last_name,
+// 				req.body.pronoun,
+// 				req.body.area_of_expertise,
+// 				req.body.phone_number,
+// 				req.body.city,
+// 				req.body.state,
+// 				req.body.zip,
+// 			]
+// 		);
 
-		console.log(req.body);
+// 		console.log(req.body);
 
-		res.status(201).json({
-			status: "success",
-			data: {
-				personal_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// 		res.status(201).json({
+// 			status: "success",
+// 			data: {
+// 				personal_information: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
-app.put("/api/v1/PForm/update/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"UPDATE personal_info SET first_name=$1,last_name=$2,pronoun=$3,area_of_expertise=$4,phone_number=$5,city=$6,state=$7,zip=$8 WHERE username = $9 RETURNING * ",
-			[
-				req.body.first_name,
-				req.body.last_name,
-				req.body.pronoun,
-				req.body.area_of_expertise,
-				req.body.phone_number,
-				req.body.city,
-				req.body.state,
-				req.body.zip,
-				req.params.username,
-			]
-		);
+// app.put("/api/v1/PForm/update/:username", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			"UPDATE personal_info SET first_name=$1,last_name=$2,pronoun=$3,area_of_expertise=$4,phone_number=$5,city=$6,state=$7,zip=$8 WHERE username = $9 RETURNING * ",
+// 			[
+// 				req.body.first_name,
+// 				req.body.last_name,
+// 				req.body.pronoun,
+// 				req.body.area_of_expertise,
+// 				req.body.phone_number,
+// 				req.body.city,
+// 				req.body.state,
+// 				req.body.zip,
+// 				req.params.username,
+// 			]
+// 		);
 
-		console.log(req.body);
+// 		console.log(req.body);
 
-		res.status(200).json({
-			status: "success",
-			data: {
-				personal_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// 		res.status(200).json({
+// 			status: "success",
+// 			data: {
+// 				personal_information: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
 //geting personal information GOOD
-app.get("/api/v1/PForm/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"SELECT * FROM personal_info WHERE username=$1 ",
-			[req.params.username]
-		);
+// app.get("/api/v1/PForm/:username", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			"SELECT * FROM personal_info WHERE username=$1 ",
+// 			[req.params.username]
+// 		);
 
-		console.log(req.params);
+// 		console.log(req.params);
 
-		res.status(200).json({
-			status: "success",
-			data: {
-				personal_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// 		res.status(200).json({
+// 			status: "success",
+// 			data: {
+// 				personal_information: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
 //good
 // inserting into medical information GOOD
-app.post("/api/v1/MForm/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"INSERT INTO medical_info (username,any_medication,medication_description,insurance) VALUES($1,$2,$3,$4) RETURNING * ",
-			[
-				req.params.username,
-				req.body.any_medication,
-				req.body.medication_description,
-				req.body.insurance,
-			]
-		);
+// app.post("/api/v1/MForm/:username", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			"INSERT INTO medical_info (username,any_medication,medication_description,insurance) VALUES($1,$2,$3,$4) RETURNING * ",
+// 			[
+// 				req.params.username,
+// 				req.body.any_medication,
+// 				req.body.medication_description,
+// 				req.body.insurance,
+// 			]
+// 		);
 
-		console.log(req.body);
+// 		console.log(req.body);
 
-		res.status(201).json({
-			status: "success",
-			data: {
-				medical_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// 		res.status(201).json({
+// 			status: "success",
+// 			data: {
+// 				medical_information: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
 // updating the medical information good
-app.put("/api/v1/MForm/update/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"UPDATE medical_info SET any_medication = $1, medication_description = $2, insurance = $3 WHERE username = $4 RETURNING * ",
-			[
-				req.body.any_medication,
-				req.body.medication_description,
-				req.body.insurance,
-				req.params.username,
-			]
-		);
+// app.put("/api/v1/MForm/update/:username", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			"UPDATE medical_info SET any_medication = $1, medication_description = $2, insurance = $3 WHERE username = $4 RETURNING * ",
+// 			[
+// 				req.body.any_medication,
+// 				req.body.medication_description,
+// 				req.body.insurance,
+// 				req.params.username,
+// 			]
+// 		);
 
-		console.log(req.body);
+// 		console.log(req.body);
 
-		res.status(200).json({
-			status: "success",
-			data: {
-				medical_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// 		res.status(200).json({
+// 			status: "success",
+// 			data: {
+// 				medical_information: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
 // retrieve into medical information Good
-app.get("/api/v1/MForm/:username", async (req, res) => {
-	try {
-		const result = await db.query(
-			"SELECT * FROM medical_info WHERE username=$1 ",
-			[req.params.username]
-		);
+// app.get("/api/v1/MForm/:username", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			"SELECT * FROM medical_info WHERE username=$1 ",
+// 			[req.params.username]
+// 		);
 
-		console.log(req.params);
+// 		console.log(req.params);
 
-		res.status(200).json({
-			status: "success",
-			data: {
-				medical_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// 		res.status(200).json({
+// 			status: "success",
+// 			data: {
+// 				medical_information: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
 // getting the resources
 
