@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
 		const jwtToken = req.header("token");
 
 		if (!jwtToken) {
-			return res.status(403).json("Not Authorized");
+			return res.status(401).json("Not Authorized");
 		}
 		// if this is verified it is going to return us a payload that we can use within our routes
 		const payload = jwt.verify(jwtToken, process.env.jwtSecret);

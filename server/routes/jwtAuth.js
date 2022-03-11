@@ -19,7 +19,7 @@ router.post("/register", validInfo, async (req, res) => {
 			[email]
 		);
 		if (user.rows.length !== 0) {
-			return res.status(401).send("User already exists");
+			return res.status(401).json("User already exists");
 		}
 		// res.json(user.rows);
 		// 3. bycrpyt the user password
