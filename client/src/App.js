@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import "./App.css";
 import {
 	BrowserRouter as Router,
@@ -6,10 +6,16 @@ import {
 	Route,
 	Navigate,
 } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // import { useNavigation } from '@react-navigation/native';
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
+
+toast.configure();
 
 function App() {
 	// we want to make sure it set to false first
@@ -19,6 +25,27 @@ function App() {
 	const setAuth = (Boolean) => {
 		setAuthenticated(Boolean);
 	};
+
+	async function isAuth() {
+		try {
+			const response = await fetch("http://localhost:4001/auth/is-verify", {
+				method: "GET",
+				headers: { token: localStorage.token },
+			});
+
+			const parseRes = await response.json();
+
+			parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
+
+			console.log(parseRes);
+		} catch (err) {
+			console.error(err.message);
+		}
+	}
+	useEffect(() => {
+		isAuth();
+	});
+
 	return (
 		<Fragment>
 			<Router>

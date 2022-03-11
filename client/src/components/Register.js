@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
-const Register = () => {
+const Register = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
 		email: "",
 		password: "",
@@ -21,8 +23,16 @@ const Register = () => {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),
 			});
+
 			const parseRes = await response.json();
-			console.log(parseRes);
+			if (parseRes.token) {
+				localStorage.setItem("token", parseRes.token);
+				setAuth(true);
+				toast.success("Registered Successfully!");
+			} else {
+				setAuth(false);
+				toast.error(parseRes);
+			}
 		} catch (err) {
 			console.error(err.message);
 		}
@@ -58,6 +68,7 @@ const Register = () => {
 				/>
 				<button className="btn btn-success btn-block">Submit</button>
 			</form>
+			<Link to="/login">Login</Link>
 		</Fragment>
 	);
 };
