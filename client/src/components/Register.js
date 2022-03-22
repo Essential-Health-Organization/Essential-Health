@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
-const Register = () => {
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+const Register = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
 		email: "",
 		password: "",
@@ -11,18 +13,29 @@ const Register = () => {
 		//like email,username, and password
 		setInputs({ ...inputs, [e.target.name]: e.target.value });
 	};
-
-	const onSubmitForm = async e => {
+	// when we submit we dont want the page to refresh
+	const onSubmitForm = async (e) => {
 		e.preventDefault();
 		try {
 			const body = { email, password, username };
 			const response = await fetch("http://localhost:3005/auth/register", {
 				method: "POST",
-				headers: { "Content-Type": "application/json"},
-				body: JSON.stringify(body)
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
 			});
 			const parseRes = await response.json();
-			console.log(parseRes);
+			if (parseRes.token) {
+				// we want to save the token to our local storage
+				localStorage.setItem("token", parseRes.token);
+				// console.log(parseRes);
+				//now we want to setAuth to true
+				setAuth(true);
+				toast.success("Register Successfully"); // then use toastify
+			} else {
+				// if false
+				setAuth(false); // set auth to false
+				toast.error(parseRes); // set the toast to send and error
+			}
 		} catch (err) {
 			console.error(err.message);
 		}
@@ -58,6 +71,7 @@ const Register = () => {
 				/>
 				<button className="btn btn-success btn-block">Submit</button>
 			</form>
+			<Link to="/login">Login</Link>
 		</Fragment>
 	);
 };
