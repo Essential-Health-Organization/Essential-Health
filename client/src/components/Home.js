@@ -1,8 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
+import { encryptStorage } from "./encrypt";
 const Home = ({ setAuth }) => {
 	const [username, setUsername] = useState("");
+	const [user_id, setuserid] = useState("");
+	// const [personalForm, setpersonalForm] = useState([]);//
+	// const [Pform, setform] = useState(false);
 	async function getUsername() {
 		try {
 			const response = await fetch("http://localhost:4001/home/", {
@@ -12,18 +16,16 @@ const Home = ({ setAuth }) => {
 			});
 
 			const parseRes = await response.json();
+			// setpersonalForm(parseData);
 			setUsername(parseRes.username);
+			setuserid(parseRes.user_id); //
+			// const encryptStorage = new EncryptStorage('secret-key');
+			encryptStorage.setItem("user_id", parseRes.user_id);
+			console.log(parseRes);
 		} catch (err) {
 			console.error(err.message);
 		}
 	}
-
-	const logout = (e) => {
-		e.preventDefault();
-		localStorage.removeItem("token");
-		setAuth(false);
-		toast.success("Logged out Successfully!");
-	};
 
 	//going to make a request when we get to this component, this is for getting from database
 	useEffect(() => {
@@ -33,9 +35,7 @@ const Home = ({ setAuth }) => {
 	return (
 		<Fragment>
 			<h1>Home {username}</h1>
-			<button className="btn btn-primary" onClick={(e) => logout(e)}>
-				logout
-			</button>
+			<h1>user id:{user_id}</h1>
 		</Fragment>
 	);
 };
