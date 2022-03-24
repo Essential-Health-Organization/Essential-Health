@@ -7,12 +7,22 @@ import {
 	NavBtn,
 	NavBtnLink,
 } from "./NavbarElements";
-const Navbar = () => {
+import { toast } from "react-toastify";
+import logo from '../pictures/new_logo.png';
+const Navbar = ({setAuth}) => {
+    
+    const logout = (e) => {
+		e.preventDefault();
+		localStorage.removeItem("token");
+		setAuth(false);
+		toast.success("Logged out Successfully!");
+	};
+
 	return (
 		<>
 			<Nav>
 				<NavLink to="/home">
-					<h1>Logo</h1>
+                <img src={logo} alt="Logo" />
 				</NavLink>
 				<Bars />
 				<NavMenu>
@@ -32,8 +42,8 @@ const Navbar = () => {
 						medical form
 					</NavLink>
 				</NavMenu>
-				<NavBtn>
-					<NavBtnLink to="/logout">logout</NavBtnLink>
+				<NavBtn onClick={(e)=>logout(e)}>
+					<NavBtnLink to="/login">logout</NavBtnLink>
 				</NavBtn>
 			</Nav>
 		</>

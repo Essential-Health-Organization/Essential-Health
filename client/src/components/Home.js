@@ -1,7 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import Personalform from "./Personalform";
+//import Personalform from "./Personalform";
 import {encryptStorage } from "./encrypt";
+// import Navbar from "./navbar";
 const Home = ({ setAuth }) => {
 	const [username, setUsername] = useState("");
 	const [user_id, setuserid] = useState("");
@@ -37,10 +38,11 @@ const Home = ({ setAuth }) => {
 	//going to make a request when we get to this component, this is for getting from database
 	useEffect(() => {
 		getUsername();
-	}, []);
+	},[]);
 
 	return (
 		<Fragment>
+			
 			<h1>Home {username}</h1>
 			<h1>{user_id}</h1>
 

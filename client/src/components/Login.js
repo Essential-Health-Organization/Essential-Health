@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import {Link} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
-
+import Messages from "./Messages";
 const Login = ({ setAuth }) => {
     // destination = setAuth
     // console.log(destination)
@@ -45,6 +45,7 @@ const onSubmitForm = async(e) =>{
 }
 	return (
 		<Fragment>
+            <Messages/>
 			<h1 className="text-center my-5">Login</h1>
 			<form onSubmit={onSubmitForm}>
 				<input

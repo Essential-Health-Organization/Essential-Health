@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+
+import { toast } from "react-toastify";
 const Personalform = (props) => {
 	const [username, setUsername] = useState("");
-    const navgation = useNavigate();
 	const [inputs, setInputs] = useState({
 		first_name: "",
 		last_name: "",
@@ -76,6 +76,7 @@ const Personalform = (props) => {
 		} catch (err) {
 			console.error(err.message);
 		}
+       
 	};
 
 	const logout = (e) => {
@@ -85,11 +86,7 @@ const Personalform = (props) => {
 		toast.success("Logged out successfully");
 	};
 
-	const redirect = (e) => {
-		e.preventDefault();
-        e.stopPropagation();
-		navgation("/home");
-	};
+	
 
 	return (
 		<Fragment>
@@ -166,7 +163,7 @@ const Personalform = (props) => {
 					type="submit"
 					value="submit"
 					className="btn btn-success btn-block"
-					onClick={(e) => redirect(e)}
+					//onClick={(e) => redirect(e)}
 				>
 					Submit
 				</button>

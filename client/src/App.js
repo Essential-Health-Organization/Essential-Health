@@ -14,8 +14,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Personalform from "./components/Personalform";
 import Navbar from "./components/navbar";
-import {encryptStorage } from "../src/components/encrypt";
-import Medicalform from "./components/Medicalform"
+import { encryptStorage } from "../src/components/encrypt";
+import Medicalform from "./components/Medicalform";
 toast.configure();
 
 function App(props) {
@@ -45,14 +45,14 @@ function App(props) {
 			console.error(err.message);
 		}
 	}
-	
+
 	useEffect(() => {
 		isAuth();
-    const storedUserID = encryptStorage.getItem("user_id");
-    //const value = encryptStorage.decryptString(storedUserID);
+		const storedUserID = encryptStorage.getItem("user_id");
+		//const value = encryptStorage.decryptString(storedUserID);
 		setuserid(storedUserID); //
 		console.log(storedUserID);
-	},[]);
+	});
 	return (
 		<Fragment>
 			<Router>
@@ -116,7 +116,7 @@ function App(props) {
 								)
 							}
 						/>
-            	<Route
+						<Route
 							exact
 							path="/mform"
 							element={
