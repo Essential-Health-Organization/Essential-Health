@@ -66,6 +66,7 @@ const Medicalform = (props) => {
 	const logout = (e) => {
 		e.preventDefault();
 		localStorage.removeItem("token");
+        localStorage.removeItem("user_id");
 		props.setAuth(false);
 		toast.success("Logged out successfully");
 	};
