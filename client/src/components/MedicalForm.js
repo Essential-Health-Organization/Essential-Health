@@ -21,6 +21,7 @@ const MedicalForm = (props) => {
 
 	const onSubmitForm = async (e) => {
 		e.preventDefault();
+		console.log(inputs);
 		try {
 			const body = { any_medication, medication_description, insurance };
 
@@ -55,37 +56,60 @@ const MedicalForm = (props) => {
 
 	return (
 		<Fragment>
-			<h1>Medical Form for {username}</h1>
-			<form onSubmit={onSubmitForm}>
-				<input
-					type="text"
-					name="any_medication"
-					placeholder="please reply with yes or no"
-					className="form-control my-3"
-					value={any_medication}
-					onChange={(e) => onChange(e)}
-				/>
+			<form
+				onSubmit={onSubmitForm}
+				className="col-xs-2 w-50 mx-auto"
+				style={{
+					border: "hidden",
+					padding: "50px 50px",
+					backgroundColor: "#56CC9D",
+					borderRadius: "20px",
+					color: "white",
+					marginTop: "35px",
+					textAlign: "center",
+				}}
+			>
+				<h1>Medical Form</h1>
+				<h5 className="mt-5">Are you using any medication?</h5>
+				<label className="radio-inline ">
+					<input
+						className="ml-2"
+						type="radio"
+						name="any_medication"
+						id="Radios1"
+						value="Yes"
+						onChange={(e) => onChange(e)}
+					/>
+					Yes
+					<input
+						className="ml-2"
+						type="radio"
+						name="any_medication"
+						id="Radios2"
+						value="No"
+						onChange={(e) => onChange(e)}
+					/>
+					No
+				</label>
+				<h5 className="mt-2">What type of medication?</h5>
 				<input
 					type="text"
 					name="medication_description"
-					placeholder="Input any type of medication here"
+					placeholder="Medication Type ..."
 					className="form-control my-3"
 					value={medication_description}
 					onChange={(e) => onChange(e)}
 				/>
+				<h5 className="mt-2">Please name your insurance</h5>
 				<input
 					type="text"
 					name="insurance"
-					placeholder="type in your insurance here"
+					placeholder="Insurance..."
 					className="form-control my-3"
 					value={insurance}
 					onChange={(e) => onChange(e)}
 				/>
-				<button
-					className="btn btn-success btn-block"
-					type="submit"
-					value="submit"
-				>
+				<button className="btn text-white" type="submit" value="submit">
 					Submit
 				</button>
 			</form>

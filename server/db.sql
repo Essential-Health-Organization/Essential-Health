@@ -91,7 +91,7 @@ INSERT INTO resources(title,fax,email,phone_number,description,website,picture,c
 
 INSERT INTO User_Saved_Resources(User_id,title,fax,email,phone_number,description,website,picture,city,state,zip,Occupation) VALUES ('b6b8cc0e-795a-4d8e-b99c-7a916e1721c1','Laura Croft','347-227-1345','Laura@gmail.com','347-221-2510','this is a therapy for computer science','lauratherapy.com','','New York','New York','10001','computer science');
 
-
+--ONLY ADD THIS after revision
 -- cascading to delete in sequence and update in sequence
 ALTER TABLE personal_info
 ADD CONSTRAINT fk_login_personal FOREIGN KEY(user_id)

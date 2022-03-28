@@ -14,6 +14,8 @@ import Register from "./components/Register";
 import PersonalForm from "./components/PersonalForm";
 import MedicalForm from "./components/MedicalForm";
 import Navbar from "./components/Navbar/nav";
+
+
 import { encryptStorage } from "../src/components/encrypt";
 toast.configure();
 function App(props) {

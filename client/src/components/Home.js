@@ -34,8 +34,29 @@ const Home = ({ setAuth }) => {
 
 	return (
 		<Fragment>
-			<h1>Home {username}</h1>
-			<h1>user id:{user_id}</h1>
+			<div
+				className="text-light"
+				style={{
+					border: "hidden",
+					padding: "50px 50px",
+					backgroundColor: "#56CC9D",
+					borderRadius: "20px",
+					color: "white",
+					marginTop: "100px",
+					textAlign: "center",
+				}}
+			>
+				<h2>Welcome,{username}</h2>
+				<h3>
+					There are a lot of people in this world that do not recieve the right
+					help. Essential Health is designed to help improve your mental health
+					by matching you to the best therapist based on you occupation. We are
+					consistantly providing as much resources as possible to help improve
+					your mental health. Also you are able to look at the reviews of the
+					clinic and pick the desired one based on the clinic, as well as give a
+					review.
+				</h3>
+			</div>
 		</Fragment>
 	);
 };

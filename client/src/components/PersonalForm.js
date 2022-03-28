@@ -76,14 +76,25 @@ const PersonalForm = (props) => {
 
 	return (
 		<Fragment>
-			{username}
-			<h1 className="text-center my-5">Personal Form</h1>
-			<form onSubmit={onSubmitForm}>
+			<form
+				onSubmit={onSubmitForm}
+				className="col-xs-2 w-50 mx-auto"
+				style={{
+					border: "hidden",
+					padding: "50px 50px",
+					backgroundColor: "#56CC9D",
+					borderRadius: "20px",
+					color: "white",
+					marginTop: "50px",
+					textAlign: "center",
+				}}
+			>
+				<h1 className="text-center my-5">Personal Form</h1>
 				<input
 					type="text"
 					// this is a name of an input
 					name="first_name"
-					placeholder="first_name"
+					placeholder="First Name..."
 					className="form-control my-3"
 					value={first_name}
 					onChange={(e) => onChange(e)}
@@ -91,7 +102,7 @@ const PersonalForm = (props) => {
 				<input
 					type="text"
 					name="last_name"
-					placeholder="Last Name"
+					placeholder="Last Name..."
 					className="form-control my-3"
 					value={last_name}
 					onChange={(e) => onChange(e)}
@@ -99,7 +110,7 @@ const PersonalForm = (props) => {
 				<input
 					type="text"
 					name="pronoun"
-					placeholder="pronoun"
+					placeholder="pronoun..."
 					className="form-control my-3"
 					value={pronoun}
 					onChange={(e) => onChange(e)}
@@ -107,7 +118,7 @@ const PersonalForm = (props) => {
 				<input
 					type="text"
 					name="occupation"
-					placeholder="occupation"
+					placeholder="Occupation..."
 					className="form-control my-3"
 					value={occupation}
 					onChange={(e) => onChange(e)}
@@ -115,7 +126,7 @@ const PersonalForm = (props) => {
 				<input
 					type="text"
 					name="phone_number"
-					placeholder="phone number"
+					placeholder="Phone Number..."
 					className="form-control my-3"
 					value={phone_number}
 					onChange={(e) => onChange(e)}
@@ -123,7 +134,7 @@ const PersonalForm = (props) => {
 				<input
 					type="text"
 					name="city"
-					placeholder="city"
+					placeholder="City..."
 					className="form-control my-3"
 					value={city}
 					onChange={(e) => onChange(e)}
@@ -131,7 +142,7 @@ const PersonalForm = (props) => {
 				<input
 					type="text"
 					name="state"
-					placeholder="state"
+					placeholder="State..."
 					className="form-control my-3"
 					value={state}
 					onChange={(e) => onChange(e)}
@@ -139,15 +150,15 @@ const PersonalForm = (props) => {
 				<input
 					type="text"
 					name="zip"
-					placeholder="zip"
+					placeholder="Zip..."
 					className="form-control my-3"
 					value={zip}
 					onChange={(e) => onChange(e)}
 				/>
 				<button
+					className="btn text-light "
 					type="submit"
 					value="submit"
-					className="btn btn-success btn-block"
 					// onClick={(e) => redirect(e)}
 				>
 					Submit

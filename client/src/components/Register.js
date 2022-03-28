@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
+import Message from "./Message";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "./pagecss/loginregister.css";
 
 const Register = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
@@ -39,36 +41,57 @@ const Register = ({ setAuth }) => {
 	};
 	return (
 		<Fragment>
-			<h1 className="text-center my-5">Register</h1>
-			<form onSubmit={onSubmitForm}>
-				<input
-					type="email"
-					// this is a name of an input
-					name="email"
-					placeholder="email"
-					className="form-control my-3"
-					value={email}
-					onChange={(e) => onChange(e)}
-				/>
-				<input
-					type="password"
-					name="password"
-					placeholder="password"
-					className="form-control my-3"
-					value={password}
-					onChange={(e) => onChange(e)}
-				/>
-				<input
-					type="text"
-					name="username"
-					placeholder="username"
-					className="form-control my-3"
-					value={username}
-					onChange={(e) => onChange(e)}
-				/>
-				<button className="btn btn-success btn-block">Submit</button>
-			</form>
-			<Link to="/login">Login</Link>
+			<div
+				className="container-fluid"
+				id="mainbg"
+				style={{
+					marginTop: "150px",
+				}}
+			>
+				<div className="row ">
+					<div className="col-md-4">
+						<Message />
+					</div>
+					<form
+						className="text-center mx-auto"
+						style={{ width: "300px" }}
+						onSubmit={onSubmitForm}
+					>
+						<h1 className="text-light">Register</h1>
+						<input
+							type="email"
+							// this is a name of an input
+							name="email"
+							placeholder="email"
+							className="form-control my-3"
+							value={email}
+							onChange={(e) => onChange(e)}
+						/>
+						<input
+							type="password"
+							name="password"
+							placeholder="password"
+							className="form-control my-3"
+							value={password}
+							onChange={(e) => onChange(e)}
+						/>
+						<input
+							type="text"
+							name="username"
+							placeholder="username"
+							className="form-control my-3"
+							value={username}
+							onChange={(e) => onChange(e)}
+						/>
+						<button className="btn text-light mt-3 text-center">Submit</button>
+						<div className="mt-4 text-light">
+							<Link className="text-light" to="/login">
+								Login
+							</Link>
+						</div>
+					</form>
+				</div>
+			</div>
 		</Fragment>
 	);
 };
