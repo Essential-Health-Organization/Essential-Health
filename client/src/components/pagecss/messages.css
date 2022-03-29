@@ -1,0 +1,47 @@
+.btn {
+	background-color: #f3969a !important;
+}
+
+#messages {
+	border-style: hidden;
+	padding: 5vw 3vh;
+	border-radius: 2vh;
+	color: white;
+	background-color: #56cc9d;
+	text-align: center;
+}
+
+@media only screen and (max-width: 575.98px) {
+	h2 {
+		font-size: 1.9em;
+	}
+	h3 {
+		font-size: 1.2em;
+	}
+}
+
+@media only screen and (max-width: 767.98px) {
+	h2 {
+		font-size: 2em;
+	}
+	h3 {
+		font-size: 1.2em;
+	}
+}
+@media only screen and (max-width: 991.98px) {
+	h2 {
+		font-size: 2em;
+	}
+	h3 {
+		font-size: 1.2em;
+	}
+}
+
+@media only screen and (max-width: 1199.98px) {
+	h2 {
+		font-size: 2em;
+	}
+	h3 {
+		font-size: 1.2em;
+	}
+}

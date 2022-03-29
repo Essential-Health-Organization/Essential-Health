@@ -1,15 +1,11 @@
-* {
+/* * {
 	margin: 0;
 	padding: 0;
 }
-.btn {
-	background-color: #f3969a !important;
-}
 
-.mainbg {
+.background {
 	background-image: url("../pictures/peace.jpg");
 	background-size: "cover";
 	background-repeat: "no-repeat";
-	width: 100%;
 	height: 100vh;
-}
+} */

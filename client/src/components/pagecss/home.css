@@ -1,0 +1,31 @@
+.btn {
+	background-color: #f3969a !important;
+}
+
+#home {
+	border-style: hidden;
+	padding: 5vh 5vw;
+	background-color: #56cc9d;
+	border-radius: 20px;
+	color: white;
+	margin-top: 7%;
+	text-align: center;
+}
+
+@media only screen and (max-width: 575.98px) {
+	h2 {
+		font-size: 2em;
+	}
+	h3 {
+		font-size: 1.2em;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	h2 {
+		font-size: 1.5em;
+	}
+	h3 {
+		font-size: 1em;
+	}
+}

@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { toast } from "react-toastify";
-
+//import { toast } from "react-toastify";
+import "./pagecss/home.css";
 import { encryptStorage } from "./encrypt";
 const Home = ({ setAuth }) => {
 	const [username, setUsername] = useState("");
@@ -34,18 +34,7 @@ const Home = ({ setAuth }) => {
 
 	return (
 		<Fragment>
-			<div
-				className="text-light"
-				style={{
-					border: "hidden",
-					padding: "50px 50px",
-					backgroundColor: "#56CC9D",
-					borderRadius: "20px",
-					color: "white",
-					marginTop: "100px",
-					textAlign: "center",
-				}}
-			>
+			<div className="text-light" id="home">
 				<h2>Welcome,{username}</h2>
 				<h3>
 					There are a lot of people in this world that do not recieve the right

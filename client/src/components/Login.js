@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import Message from "./Message";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import "./pagecss/loginregister.css";
+import "./pagecss/login.css";
 
 const Login = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
@@ -44,12 +44,7 @@ const Login = ({ setAuth }) => {
 	};
 	return (
 		<Fragment>
-			<div
-				className="container-fluid"
-				style={{
-					marginTop: "150px",
-				}}
-			>
+			<div className="container-fluid" id="loginform">
 				<div className="row ">
 					<div className="col-md-4">
 						<Message />

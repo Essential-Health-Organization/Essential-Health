@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import "./pagecss/personalform.css";
 const PersonalForm = (props) => {
 	const [username, setUsername] = useState("");
 	const [inputs, setInputs] = useState({
@@ -78,18 +78,10 @@ const PersonalForm = (props) => {
 		<Fragment>
 			<form
 				onSubmit={onSubmitForm}
-				className="col-xs-2 w-50 mx-auto"
-				style={{
-					border: "hidden",
-					padding: "50px 50px",
-					backgroundColor: "#56CC9D",
-					borderRadius: "20px",
-					color: "white",
-					marginTop: "50px",
-					textAlign: "center",
-				}}
+				className="col-xs-2 mx-auto"
+				id="personalform"
 			>
-				<h1 className="text-center my-5">Personal Form</h1>
+				<h1 className="my-5">Personal Form</h1>
 				<input
 					type="text"
 					// this is a name of an input
