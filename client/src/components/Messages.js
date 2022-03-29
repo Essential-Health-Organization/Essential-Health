@@ -54,12 +54,28 @@ const Messages = () => {
 	}, []);
 
 	return (
-		<Fragment>
-			<h3>messages </h3>
-			<h1>{insperational_message}</h1>
-			<button onClick={() =>handleClick()}>Click</button>
-			
-		</Fragment>
+        <Fragment>
+        <div
+            className="fluid-container text-center"
+            style={{
+                border: "hidden",
+                padding: "50px 50px",
+                backgroundColor: "#56CC9D",
+                borderRadius: "20px",
+                color: "white",
+            }}
+        >
+            <h1>Not feeling like yourself?</h1>
+            <h4>Here click me</h4>
+            <h1>{insperational_message}</h1>
+            <button
+                className="btn text-light  mt-3 mb-3"
+                onClick={() => handleClick()}
+            >
+                click
+            </button>
+        </div>
+    </Fragment>
 	);
 };
 

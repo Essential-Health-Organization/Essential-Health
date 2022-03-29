@@ -26,7 +26,7 @@ const MedicalForm = (props) => {
 			const body = { any_medication, medication_description, insurance };
 
 			const response = await fetch(
-				`http://localhost:3005/mform/${props.user_id}`,
+				`http://localhost:4001/mform/${props.user_id}`,
 				{
 					method: "POST",
 					//pass token with localstorage because it is stored in the header

@@ -36,7 +36,6 @@ app.use("/results",require("./routes/results"))
 
 
 // ROUTES
-//get one message // this is one route to get one message
 
 // insperational_messages route good
 // app.get("/api/v1/message/:insperational_message_id", async (req, res) => {
@@ -80,27 +79,12 @@ app.use("/results",require("./routes/results"))
 // 	}
 // });
 
-//good
-//to get a user, maybe will change  to post later on, we need to implement validation g
-// app.get("/api/v1/Login", async (req, res) => {
-// 	try {
-// 		const result = await db.query(
-// 			`SELECT email,password FROM login_credentials WHERE email = '${req.body.email}'`
-// 		);
+app.use("/home", require("./routes/home"));
 
-// 		console.log(req.body);
+//get one message // this is one route to get one message
 
-// 		// console.log(result.rows[0]);
-// 		res.status(201).json({
-// 			status: "success",
-// 			data: {
-// 				login: result.rows[0], //this gets the one row we need
-// 			},
-// 		});
-// 	} catch (err) {
-// 		console.error(err.message);
-// 	}
-// });
+// insperational_messages route good
+app.use("/message", require("./routes/message"));
 
 //good
 // Insert into personal info table,need to fix vulnerability risk
@@ -186,7 +170,6 @@ app.use("/results",require("./routes/results"))
 // 	}
 // });
 
-//good
 // inserting into medical information GOOD
 // app.post("/api/v1/MForm/:username", async (req, res) => {
 // 	try {

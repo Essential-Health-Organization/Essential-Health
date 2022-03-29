@@ -42,6 +42,9 @@ const Navbar = ({setAuth}) => {
                     <NavLink to="/mform" activeStyle>
 						medical form
 					</NavLink>
+                    <NavLink to="/profile" activeStyle>
+						profile
+					</NavLink>
 				</NavMenu>
 				<NavBtn onClick={(e)=>logout(e)}>
 					<NavBtnLink to="/login">logout</NavBtnLink>

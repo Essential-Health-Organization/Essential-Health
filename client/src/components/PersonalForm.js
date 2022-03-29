@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "./pagecss/loginregister.css";
+
 const PersonalForm = (props) => {
 	const [username, setUsername] = useState("");
 	const [inputs, setInputs] = useState({
@@ -44,7 +44,7 @@ const PersonalForm = (props) => {
 			};
 			// console.log(user_id)
 			const response = await fetch(
-				`http://localhost:3005/pform/${props.user_id}`,
+				`http://localhost:4001/pform/${props.user_id}`,
 				{
 					method: "POST",
 					headers: {
@@ -55,6 +55,7 @@ const PersonalForm = (props) => {
 				}
 			);
 			const parseRes = await response.json();
+
 			setUsername(parseRes.username);
 			if (parseRes.token) {
 				// we want to save the token to our local storage
@@ -72,6 +73,7 @@ const PersonalForm = (props) => {
 			console.error(err.message);
 		}
 	};
+
 	return (
 		<Fragment>
 			<form
@@ -79,13 +81,12 @@ const PersonalForm = (props) => {
 				className="col-xs-2 w-50 mx-auto"
 				style={{
 					border: "hidden",
-					padding: "20px 20px",
+					padding: "50px 50px",
 					backgroundColor: "#56CC9D",
 					borderRadius: "20px",
 					color: "white",
-					marginTop: "10px",
+					marginTop: "50px",
 					textAlign: "center",
-					// height:100vh,
 				}}
 			>
 				<h1 className="text-center my-5">Personal Form</h1>

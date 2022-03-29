@@ -96,3 +96,27 @@ INSERT INTO User_Saved_Resources(User_id,title,fax,email,phone_number,descriptio
 
 
 
+--ONLY ADD THIS after revision
+-- cascading to delete in sequence and update in sequence
+ALTER TABLE personal_info
+ADD CONSTRAINT fk_login_personal FOREIGN KEY(user_id)
+REFERENCES login_credentials(user_id)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE medical_info
+ADD CONSTRAINT fk_login_medical FOREIGN KEY(user_id)
+REFERENCES login_credentials(user_id)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE user_saved_resources
+ADD CONSTRAINT fk_login_saved_resources FOREIGN KEY(user_id)
+REFERENCES login_credentials(user_id)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+INSERT INTO insperational_messages(insperational_message) VALUES ('You are Awesome and Dont FORGET IT !!');
+INSERT INTO insperational_messages(insperational_message) VALUES ('You are Special and Dont FORGET IT !!');
+INSERT INTO insperational_messages(insperational_message) VALUES ('You are Amazing and Dont FORGET IT !!');
+

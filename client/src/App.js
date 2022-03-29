@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./App.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
 	BrowserRouter as Router,
@@ -12,13 +12,14 @@ import {
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Personalform from "./components/Personalform";
+import PersonalForm from "./components/PersonalForm";
 import Navbar from "./components/navbar";
 import { encryptStorage } from "../src/components/encrypt";
-import Medicalform from "./components/Medicalform";
+import MedicalForm from "./components/MedicalForm";
+import ListPersonalForm from './components/ListPersonalForm'
 toast.configure();
 
-function App(props) {
+function App() {
 	const [username, setUsername] = useState("");
 	const [user_id, setuserid] = useState("");
 	// we want to make sure it set to false first
@@ -37,7 +38,6 @@ function App(props) {
 				headers: { token: localStorage.token },
 			});
 			const parseRes = await response.json();
-
 			console.log(parseRes);
 			//saying if parse is true setauth to true else set to false
 			parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
@@ -45,9 +45,12 @@ function App(props) {
 			console.error(err.message);
 		}
 	}
-
 	useEffect(() => {
 		isAuth();
+    //in the login comp we are setting user id 
+    // this app.js we are doing reading the value user id val that was set in the login comp
+    // and setting the user id value of the app comp to value from what we receive the 
+    // encrypt storage
 		const storedUserID = encryptStorage.getItem("user_id");
 		//const value = encryptStorage.decryptString(storedUserID);
 		setuserid(storedUserID); //
@@ -56,7 +59,7 @@ function App(props) {
 	return (
 		<Fragment>
 			<Router>
-				<Navbar setAuth={setAuth} />
+				<Navbar setAuth={setAuth} user_id={user_id} />
 				{/* reason why we use render instead of component props is because
                               anytime we send props to a component we don't want it to remount /} 
 
@@ -68,7 +71,6 @@ function App(props) {
                               (<Route exact path="/login">
                               <Link to="/home"/>
                               </Route>)
-
                               */}
 				<div className="container">
 					<Routes>
@@ -99,7 +101,7 @@ function App(props) {
 							path="/home"
 							element={
 								isAuthenticated ? (
-									<Home setAuth={setAuth} />
+									<Home setAuth={setAuth} user_id={user_id}/>
 								) : (
 									<Navigate to="/login" />
 								)
@@ -110,7 +112,7 @@ function App(props) {
 							path="/pform"
 							element={
 								isAuthenticated ? (
-									<Personalform setAuth={setAuth} user_id={user_id} />
+									<PersonalForm setAuth={setAuth} user_id={user_id} />
 								) : (
 									<Navigate to="/home" />
 								)
@@ -121,7 +123,19 @@ function App(props) {
 							path="/mform"
 							element={
 								isAuthenticated ? (
-									<Medicalform setAuth={setAuth} user_id={user_id} />
+									<MedicalForm setAuth={setAuth} user_id={user_id} />
+								) : (
+									<Navigate to="/home" />
+								)
+							}
+						/>
+            	<Route
+							exact
+							path="/profile"
+							element={
+								isAuthenticated ? (
+									<ListPersonalForm setAuth={setAuth} user_id={user_id} />
+                  
 								) : (
 									<Navigate to="/home" />
 								)
@@ -135,5 +149,4 @@ function App(props) {
 		</Fragment>
 	);
 }
-
 export default App;
