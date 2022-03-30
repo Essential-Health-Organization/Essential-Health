@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 //import { toast } from "react-toastify";
 import "./pagecss/home.css";
-import { encryptStorage } from "./encrypt";
+// import { encryptStorage } from "./encrypt";
 const Home = ({ setAuth }) => {
 	const [username, setUsername] = useState("");
 	const [user_id, setuserid] = useState("");
@@ -20,7 +20,7 @@ const Home = ({ setAuth }) => {
 			setUsername(parseRes.username);
 			setuserid(parseRes.user_id); //
 			// const encryptStorage = new EncryptStorage('secret-key');
-			encryptStorage.setItem("user_id", parseRes.user_id);
+			// encryptStorage.setItem("user_id", parseRes.user_id);
 			console.log(parseRes);
 		} catch (err) {
 			console.error(err.message);

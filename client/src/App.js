@@ -14,6 +14,7 @@ import Register from "./components/Register";
 import PersonalForm from "./components/PersonalForm";
 import MedicalForm from "./components/MedicalForm";
 import Navbar from "./components/Navbar/nav";
+import ListPersonalForm from "./components/ListPersonalForm";
 
 import { encryptStorage } from "../src/components/encrypt";
 toast.configure();
@@ -48,12 +49,16 @@ function App(props) {
 		//const value = encryptStorage.decryptString(storedUserID);
 		setuserid(storedUserID); //
 		console.log(storedUserID);
+		//in the login comp we are setting user id
+		// this app.js we are reading the value user_id val that was set in the login comp
+		// and setting the user_id value of the app comp to value from what we receive the
+		// encrypt storage
 	});
 	return (
 		<Fragment>
 			<Router>
 				<div className="background">
-					<Navbar setAuth={setAuth} />
+					<Navbar setAuth={setAuth} user_id={user_id} />
 					{/* reason why we use render instead of component props is because
                               anytime we send props to a component we don't want it to remount /}
                               !isAuthenticated ?
@@ -94,7 +99,7 @@ function App(props) {
 								path="/home"
 								element={
 									isAuthenticated ? (
-										<Home setAuth={setAuth} />
+										<Home setAuth={setAuth} user_id={user_id} />
 									) : (
 										<Navigate to="/login" />
 									)
@@ -117,6 +122,17 @@ function App(props) {
 								element={
 									isAuthenticated ? (
 										<MedicalForm setAuth={setAuth} user_id={user_id} />
+									) : (
+										<Navigate to="/home" />
+									)
+								}
+							/>
+							<Route
+								exact
+								path="/profile"
+								element={
+									isAuthenticated ? (
+										<ListPersonalForm setAuth={setAuth} user_id={user_id} />
 									) : (
 										<Navigate to="/home" />
 									)

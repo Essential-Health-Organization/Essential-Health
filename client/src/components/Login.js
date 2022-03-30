@@ -3,6 +3,7 @@ import Message from "./Message";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./pagecss/login.css";
+import { encryptStorage } from "./encrypt";
 
 const Login = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
@@ -31,7 +32,10 @@ const Login = ({ setAuth }) => {
 
 			if (parseRes.token) {
 				localStorage.setItem("token", parseRes.token);
+				encryptStorage.setItem("user_id", parseRes.user_id);
+
 				setAuth(true);
+
 				toast.success("login successfully!");
 			} else {
 				setAuth(false);
