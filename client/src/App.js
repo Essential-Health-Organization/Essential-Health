@@ -13,8 +13,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import PersonalForm from "./components/PersonalForm";
 import MedicalForm from "./components/MedicalForm";
-import Navbar from "./components/Navbar/nav";
+import Navbar from "./components/Navbar/Navbar";
 import ListPersonalForm from "./components/ListPersonalForm";
+import Footer from "./components/footer/Footer";
 
 import { encryptStorage } from "../src/components/encrypt";
 toast.configure();
@@ -138,11 +139,14 @@ function App(props) {
 									)
 								}
 							/>
+
 							{/* <Route exact path="/pfrom" element={<Personalform/>}/> */}
 							{/* {/ <Route exact path="/home" element={props => <Home {...props} />} /> */}
 						</Routes>
 					</div>
 				</div>
+
+				<Footer />
 			</Router>
 		</Fragment>
 	);

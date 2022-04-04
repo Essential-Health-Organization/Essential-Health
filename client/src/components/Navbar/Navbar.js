@@ -22,7 +22,7 @@ const Navbar = ({ setAuth }) => {
 				<NavLink to="/home">
 					<img src={logo} alt="Logo" />
 				</NavLink>
-				<Bars />
+				<Bars></Bars>
 				<NavMenu>
 					{/* <NavLink to="/login" activeStyle>
                         login
