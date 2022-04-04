@@ -109,3 +109,4 @@ ADD CONSTRAINT fk_login_saved_resources FOREIGN KEY(user_id)
 REFERENCES login_credentials(user_id)
 ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- select *, case when activation_status is null then 0 end as activation_status from login_credentials;
