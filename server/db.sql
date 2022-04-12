@@ -120,3 +120,13 @@ INSERT INTO insperational_messages(insperational_message) VALUES ('You are Aweso
 INSERT INTO insperational_messages(insperational_message) VALUES ('You are Special and Dont FORGET IT !!');
 INSERT INTO insperational_messages(insperational_message) VALUES ('You are Amazing and Dont FORGET IT !!');
 
+
+--Alter table
+Alter table resources rename column phone_number to work_phone_number;
+Alter table resources rename column zip to zipcode;
+
+
+
+-- more resources
+
+INSERT INTO resources(title,fax,email,work_phone_number,description,website,picture,city,state,zip,Occupation) VALUES ('Kraft','347-923-9111','Karaft@gmail.com','347-221-9111','this is a therapy for all','karfttherapy.com','','New York','New York','10001','computer science');

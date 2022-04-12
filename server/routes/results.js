@@ -14,7 +14,7 @@ router.get("/:user_id",authorization, async (req, res) => {
 		res.status(200).json({
 			status: "success",
 			data: {
-				resource_information: result.rows[0], //this gets the one row we need
+				resource_information: result.rows, //this gets the one row we need
 			},
 		});
 	} catch (err) {
