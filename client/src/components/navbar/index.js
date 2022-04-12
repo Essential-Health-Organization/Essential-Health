@@ -45,6 +45,9 @@ const Navbar = ({setAuth}) => {
                     <NavLink to="/profile" activeStyle>
 						profile
 					</NavLink>
+					<NavLink to="/results" activeStyle>
+						Results
+					</NavLink>
 				</NavMenu>
 				<NavBtn onClick={(e)=>logout(e)}>
 					<NavBtnLink to="/login">logout</NavBtnLink>

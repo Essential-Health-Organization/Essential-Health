@@ -16,7 +16,8 @@ import PersonalForm from "./components/PersonalForm";
 import Navbar from "./components/navbar";
 import { encryptStorage } from "../src/components/encrypt";
 import MedicalForm from "./components/MedicalForm";
-import ListPersonalForm from './components/ListPersonalForm'
+import ListPersonalForm from "./components/ListPersonalForm";
+import Results from "./components/Results"
 toast.configure();
 
 function App() {
@@ -47,10 +48,10 @@ function App() {
 	}
 	useEffect(() => {
 		isAuth();
-    //in the login comp we are setting user id 
-    // this app.js we are doing reading the value user id val that was set in the login comp
-    // and setting the user id value of the app comp to value from what we receive the 
-    // encrypt storage
+		//in the login comp we are setting user id
+		// this app.js we are doing reading the value user id val that was set in the login comp
+		// and setting the user id value of the app comp to value from what we receive the
+		// encrypt storage
 		const storedUserID = encryptStorage.getItem("user_id");
 		//const value = encryptStorage.decryptString(storedUserID);
 		setuserid(storedUserID); //
@@ -59,8 +60,9 @@ function App() {
 	return (
 		<Fragment>
 			<Router>
-				<Navbar setAuth={setAuth} user_id={user_id} />
-				{/* reason why we use render instead of component props is because
+				<div className="background">
+					<Navbar setAuth={setAuth} user_id={user_id} />
+					{/* reason why we use render instead of component props is because
                               anytime we send props to a component we don't want it to remount /} 
 
                               !isAuthenticated ?
@@ -72,78 +74,90 @@ function App() {
                               <Link to="/home"/>
                               </Route>)
                               */}
-				<div className="container">
-					<Routes>
-						<Route
-							exact
-							path="/login"
-							element={
-								!isAuthenticated ? (
-									<Login setAuth={setAuth} />
-								) : (
-									<Navigate to="/home" />
-								)
-							}
-						/>
-						<Route
-							exact
-							path="/register"
-							element={
-								!isAuthenticated ? (
-									<Register setAuth={setAuth} />
-								) : (
-									<Navigate to="/home" />
-								)
-							}
-						/>
-						<Route
-							exact
-							path="/home"
-							element={
-								isAuthenticated ? (
-									<Home setAuth={setAuth} user_id={user_id}/>
-								) : (
-									<Navigate to="/login" />
-								)
-							}
-						/>
-						<Route
-							exact
-							path="/pform"
-							element={
-								isAuthenticated ? (
-									<PersonalForm setAuth={setAuth} user_id={user_id} />
-								) : (
-									<Navigate to="/home" />
-								)
-							}
-						/>
-						<Route
-							exact
-							path="/mform"
-							element={
-								isAuthenticated ? (
-									<MedicalForm setAuth={setAuth} user_id={user_id} />
-								) : (
-									<Navigate to="/home" />
-								)
-							}
-						/>
-            	<Route
-							exact
-							path="/profile"
-							element={
-								isAuthenticated ? (
-									<ListPersonalForm setAuth={setAuth} user_id={user_id} />
-                  
-								) : (
-									<Navigate to="/home" />
-								)
-							}
-						/>
-						{/* <Route exact path="/pfrom" element={<Personalform/>}/> */}
-						{/* {/ <Route exact path="/home" element={props => <Home {...props} />} /> */}
-					</Routes>
+					<div className="container">
+						<Routes>
+							<Route
+								exact
+								path="/login"
+								element={
+									!isAuthenticated ? (
+										<Login setAuth={setAuth} />
+									) : (
+										<Navigate to="/home" />
+									)
+								}
+							/>
+							<Route
+								exact
+								path="/register"
+								element={
+									!isAuthenticated ? (
+										<Register setAuth={setAuth} />
+									) : (
+										<Navigate to="/home" />
+									)
+								}
+							/>
+							<Route
+								exact
+								path="/home"
+								element={
+									isAuthenticated ? (
+										<Home setAuth={setAuth} user_id={user_id} />
+									) : (
+										<Navigate to="/login" />
+									)
+								}
+							/>
+							<Route
+								exact
+								path="/pform"
+								element={
+									isAuthenticated ? (
+										<PersonalForm setAuth={setAuth} user_id={user_id} />
+									) : (
+										<Navigate to="/home" />
+									)
+								}
+							/>
+							<Route
+								exact
+								path="/mform"
+								element={
+									isAuthenticated ? (
+										<MedicalForm setAuth={setAuth} user_id={user_id} />
+									) : (
+										<Navigate to="/home" />
+									)
+								}
+							/>
+							<Route
+								exact
+								path="/profile"
+								element={
+									isAuthenticated ? (
+										<ListPersonalForm setAuth={setAuth} user_id={user_id} />
+									) : (
+										<Navigate to="/home" />
+									)
+								}
+							/>
+								<Route
+								exact
+								path="/results"
+								element={
+									isAuthenticated ? (
+										<Results setAuth={setAuth} user_id={user_id} />
+									) : (
+										<Navigate to="/home" />
+									)
+								}
+							/>
+             
+							{/* <Route exact path="/pfrom" element={<Personalform/>}/> */}
+							{/* {/ <Route exact path="/home" element={props => <Home {...props} />} /> */}
+						</Routes>
+					</div>
 				</div>
 			</Router>
 		</Fragment>

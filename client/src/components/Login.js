@@ -2,9 +2,8 @@ import React, { Fragment, useState } from "react";
 import Messages from "./Messages";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import "./pagecss/loginregister.css";
+import "./pagecss/login.css";
 import { encryptStorage } from "./encrypt";
-
 
 const Login = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
@@ -33,8 +32,8 @@ const Login = ({ setAuth }) => {
 
 			if (parseRes.token) {
 				localStorage.setItem("token", parseRes.token);
-                console.log(parseRes)
-                encryptStorage.setItem("user_id", parseRes.user_id);
+				console.log(parseRes);
+				encryptStorage.setItem("user_id", parseRes.user_id);
 				setAuth(true);
 				toast.success("login successfully!");
 			} else {
@@ -48,12 +47,7 @@ const Login = ({ setAuth }) => {
 	};
 	return (
 		<Fragment>
-			<div
-				className="container-fluid"
-				style={{
-					marginTop: "150px",
-				}}
-			>
+			<div className="container-fluid" id="loginform">
 				<div className="row ">
 					<div className="col-md-4">
 						<Messages />
@@ -73,7 +67,6 @@ const Login = ({ setAuth }) => {
 								value={email}
 								onChange={(e) => onChange(e)}
 							/>
-
 							<input
 								type="password"
 								name="password"

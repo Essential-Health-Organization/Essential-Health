@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import Messages from "./Messages";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "./pagecss/loginregister.css";
+import "./pagecss/register.css";
 
 const Register = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
@@ -58,7 +58,7 @@ const Register = ({ setAuth }) => {
 					</div>
 					<form
 						className="text-center mx-auto"
-						style={{ width: "300px" }}
+						id="registerform"
 						onSubmit={onSubmitForm}
 					>
 						<h1 className="text-light">Register</h1>
