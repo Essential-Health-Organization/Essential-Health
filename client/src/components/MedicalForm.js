@@ -66,6 +66,7 @@ const MedicalForm = (props) => {
 				<label className="radio-inline ">
 					<input
 						className="ml-2"
+						required
 						type="radio"
 						name="any_medication"
 						id="Radios1"
@@ -75,6 +76,7 @@ const MedicalForm = (props) => {
 					Yes
 					<input
 						className="ml-2"
+						required
 						type="radio"
 						name="any_medication"
 						id="Radios2"
@@ -86,6 +88,7 @@ const MedicalForm = (props) => {
 				<h5 className="mt-2">What type of medication?</h5>
 				<input
 					type="text"
+					required
 					name="medication_description"
 					placeholder="Medication Type ..."
 					className="form-control my-3"
@@ -95,6 +98,7 @@ const MedicalForm = (props) => {
 				<h5 className="mt-2">Please name your insurance</h5>
 				<input
 					type="text"
+					required
 					name="insurance"
 					placeholder="Insurance..."
 					className="form-control my-3"

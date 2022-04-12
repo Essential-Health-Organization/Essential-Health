@@ -13,6 +13,7 @@ const Navbar = ({ setAuth }) => {
 	const logout = (e) => {
 		e.preventDefault();
 		localStorage.removeItem("token");
+		localStorage.removeItem("user_id");
 		setAuth(false);
 		toast.success("Logged out Successfully!");
 	};
@@ -22,7 +23,7 @@ const Navbar = ({ setAuth }) => {
 				<NavLink to="/home">
 					<img src={logo} alt="Logo" />
 				</NavLink>
-				<Bars></Bars>
+				<Bars />
 				<NavMenu>
 					{/* <NavLink to="/login" activeStyle>
                         login
@@ -37,10 +38,13 @@ const Navbar = ({ setAuth }) => {
 						Personal Form
 					</NavLink>
 					<NavLink to="/mform" activeStyle>
-						Medical Form
+						Medical form
 					</NavLink>
 					<NavLink to="/profile" activeStyle>
 						Profile
+					</NavLink>
+					<NavLink to="/results" activeStyle>
+						Results
 					</NavLink>
 				</NavMenu>
 				<NavBtn onClick={(e) => logout(e)}>
@@ -50,5 +54,4 @@ const Navbar = ({ setAuth }) => {
 		</>
 	);
 };
-
 export default Navbar;

@@ -84,6 +84,7 @@ const PersonalForm = (props) => {
 				<h1 className="my-5">Personal Form</h1>
 				<input
 					type="text"
+					required
 					// this is a name of an input
 					name="first_name"
 					placeholder="First Name..."
@@ -93,6 +94,7 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
+					required
 					name="last_name"
 					placeholder="Last Name..."
 					className="form-control my-3"
@@ -101,6 +103,7 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
+					required
 					name="pronoun"
 					placeholder="pronoun..."
 					className="form-control my-3"
@@ -109,6 +112,7 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
+					required
 					name="occupation"
 					placeholder="Occupation..."
 					className="form-control my-3"
@@ -117,6 +121,7 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
+					required
 					name="phone_number"
 					placeholder="Phone Number..."
 					className="form-control my-3"
@@ -125,6 +130,7 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
+					required
 					name="city"
 					placeholder="City..."
 					className="form-control my-3"
@@ -133,6 +139,7 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
+					required
 					name="state"
 					placeholder="State..."
 					className="form-control my-3"
@@ -141,6 +148,7 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
+					required
 					name="zip"
 					placeholder="Zip..."
 					className="form-control my-3"

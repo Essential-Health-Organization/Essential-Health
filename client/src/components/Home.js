@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 //import { toast } from "react-toastify";
 import "./pagecss/home.css";
+// import { FontAwesomeIcon } from "@fontawesome-free-solid";
 // import { encryptStorage } from "./encrypt";
 const Home = ({ setAuth }) => {
 	const [username, setUsername] = useState("");
@@ -34,20 +35,75 @@ const Home = ({ setAuth }) => {
 
 	return (
 		<Fragment>
-			<div className="text-light" id="home">
-				<h2>Welcome,{username}</h2>
-				<h3>
-					There are a lot of people in this world that do not recieve the right
-					help. Essential Health is designed to help improve your mental health
-					by matching you to the best therapist based on you occupation. We are
-					consistantly providing as much resources as possible to help improve
-					your mental health. Also you are able to look at the reviews of the
-					clinic and pick the desired one based on the clinic, as well as give a
-					review.
-				</h3>
+			<div className="container">
+				<div className="row">
+					<div className="col-md-4 col-sm-12 d-flex justify-content-center">
+						<div className="card-body text-center text-white">
+							<i className="fa-solid fa-bullseye fa-6x  my-3 "></i>
+							<h2 className="card-title mb-4">Card Title</h2>
+
+							<p className="card-text">
+								Our Mission is to help the community out by helping people with
+								mental health issues
+							</p>
+						</div>
+					</div>
+
+					<div className="col-md-4 col-sm-12 d-flex justify-content-center">
+						<div className="card-body text-center text-white">
+							<i className="fa-solid fa-glasses fa-6x text-center my-3 "></i>
+							<h2 className="card-title mb-4">Card Title</h2>
+
+							<p className="card-text">
+								Our Mission is to help the community out by helping people with
+								mental health issues
+							</p>
+						</div>
+					</div>
+
+					<div className="col-md-4 col-sm-12  d-flex justify-content-center">
+						<div className="card-body text-center text-white pb-4">
+							<i class="fa-solid fa-hand-holding-medical fa-6x text-center my-3 "></i>
+							<h2 className="card-title mb-4">Card Title</h2>
+
+							<p className="card-text">
+								Our Mission is to help the community out by helping people with
+								mental health issues
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="container">
+				<div className="row">
+					<div className="col-md-6 col-sm-12  d-flex justify-content-center">
+						<div className="card-body text-center text-white">
+							<i className="fa-solid fa-bullseye fa-6x  my-3 "></i>
+
+							<h2 className="card-title mb-4">Card Title</h2>
+							<p className="card-text">
+								Our Mission is to help the community out by helping people with
+								mental health issues
+							</p>
+						</div>
+					</div>
+					<div className="col-md-6 col-sm-12 d-flex justify-content-center pd-5">
+						<div className="card-body text-center text-white">
+							<i className="fa-solid fa-glasses fa-6x text-center my-3 "></i>
+
+							<h2 className="card-title mb-4">Card Title</h2>
+							<p className="card-text">
+								Our Mission is to help the community out by helping people with
+								mental health issues
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</Fragment>
 	);
 };
 
 export default Home;
+

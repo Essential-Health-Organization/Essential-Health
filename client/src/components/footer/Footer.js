@@ -14,11 +14,13 @@ export default function Footer() {
 						</ul>
 					</div>
 				</div>
-				<div className="footer-bottom py-1 mx-auto">
-					<p className="text-xs-center text-white text-center">
-						&copy;{new Date().getFullYear()} Essential Health - All Rights
-						Reserved
-					</p>
+				<div className="row">
+					<div className="col-12 py-1 mx-auto ">
+						<p className="text-xs-center text-white text-center">
+							&copy;{new Date().getFullYear()} Essential Health - All Rights
+							Reserved
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
