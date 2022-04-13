@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "./pagecss/medicalform.css";
+
 const MedicalForm = (props) => {
 	const [username, setUsername] = useState("");
 	const [inputs, setInputs] = useState({
@@ -26,7 +26,7 @@ const MedicalForm = (props) => {
 			const body = { any_medication, medication_description, insurance };
 
 			const response = await fetch(
-				`http://localhost:3005/mform/${props.user_id}`,
+				`http://localhost:4001/mform/${props.user_id}`,
 				{
 					method: "POST",
 					//pass token with localstorage because it is stored in the header
@@ -58,11 +58,19 @@ const MedicalForm = (props) => {
 		<Fragment>
 			<form
 				onSubmit={onSubmitForm}
-				className="col-xs-2w-50 mx-auto"
-				id="medicalform"
+				className="col-xs-2 w-50 mx-auto"
+				style={{
+					border: "hidden",
+					padding: "50px 50px",
+					backgroundColor: "#56CC9D",
+					borderRadius: "20px",
+					color: "white",
+					marginTop: "35px",
+					textAlign: "center",
+				}}
 			>
 				<h1>Medical Form</h1>
-				<h5 className="mt-4">Are you using any medication?</h5>
+				<h5 className="mt-5">Are you using any medication?</h5>
 				<label className="radio-inline ">
 					<input
 						className="ml-2"
