@@ -40,7 +40,7 @@ const Results = (props) => {
 	return (
 		<Fragment>
 			<table
-				className="table table-responsive px-2 py-2 table-light mt-5 text-center text-dark rounded "
+				className="table table-responsive table-light  text-center text-dark rounded "
 				id="table"
 			>
 				<thead>

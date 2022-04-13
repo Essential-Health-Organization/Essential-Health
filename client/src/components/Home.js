@@ -77,19 +77,34 @@ const Home = ({ setAuth }) => {
 
 			<div className="container">
 				<div className="row">
-					<div className="col-md-6 col-sm-12  d-flex justify-content-center">
-						<div className="card-body text-center text-white">
-							<i className="fa-solid fa-bullseye fa-6x  my-3 "></i>
+					<div className="card col-md-6 col-sm-12  d-flex justify-content-center mb-5 ">
+						<img
+							src={require("./pictures/ProPic.jpg")}
+							className="card-img-top"
+							alt="..."
+							style={{
+								width: "25em",
+								height: "15em",
+								marginTop: "2em",
+								marginLeft: "3em",
+								marginRight: "3em",
+							}}
+						/>
 
-							<h2 className="card-title mb-4">Card Title</h2>
+						<div className="card-body text-center text-black">
+							<h2 className="card-title mb-4">Alexey Aulov</h2>
 							<p className="card-text">
-								Our Mission is to help the community out by helping people with
-								mental health issues
+								Hi my name is Alexey Aulov I am a senior at College of Staten
+								Island studying Information System and Informatics. I had the
+								original idea of Essential Health after I witnessed that
+								sometimes the best way for people to get mental help is to have
+								Therapist that can relate to you as much as possible to help you
+								out. Helping people gives me the most gratitude in life.
 							</p>
 						</div>
 					</div>
-					<div className="col-md-6 col-sm-12 d-flex justify-content-center pd-5">
-						<div className="card-body text-center text-white">
+					<div className="card col-md-6 col-sm-12 d-flex justify-content-center mb-5 ">
+						<div className="card-body text-center text-black">
 							<i className="fa-solid fa-glasses fa-6x text-center my-3 "></i>
 
 							<h2 className="card-title mb-4">Card Title</h2>
@@ -106,4 +121,3 @@ const Home = ({ setAuth }) => {
 };
 
 export default Home;
-
