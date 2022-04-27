@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import DoughnutChart from "./DoughnutChart";
 //import { toast } from "react-toastify";
 import "./pagecss/home.css";
 // import { FontAwesomeIcon } from "@fontawesome-free-solid";
@@ -63,7 +64,7 @@ const Home = ({ setAuth }) => {
 
 					<div className="col-md-4 col-sm-12  d-flex justify-content-center">
 						<div className="card-body text-center text-white pb-4">
-							<i class="fa-solid fa-hand-holding-medical fa-6x text-center my-3 "></i>
+							<i className="fa-solid fa-hand-holding-medical fa-6x text-center my-3 "></i>
 							<h2 className="card-title mb-4">Card Title</h2>
 
 							<p className="card-text">
@@ -75,20 +76,17 @@ const Home = ({ setAuth }) => {
 				</div>
 			</div>
 
-			<div className="container">
-				<div className="row">
-					<div className="card col-md-6 col-sm-12  d-flex justify-content-center mb-5 ">
+			<div className="container-fluid">
+				<div className="row justify-content-around">
+					<div
+						className="card col-lg-5 col-md-6 col-sm-12  d-flex justify-content-center mb-5 "
+						id="CardOne"
+					>
 						<img
 							src={require("./pictures/ProPic.jpg")}
 							className="card-img-top"
+							id="pictureOne"
 							alt="..."
-							style={{
-								width: "25em",
-								height: "15em",
-								marginTop: "2em",
-								marginLeft: "3em",
-								marginRight: "3em",
-							}}
 						/>
 
 						<div className="card-body text-center text-black">
@@ -103,10 +101,17 @@ const Home = ({ setAuth }) => {
 							</p>
 						</div>
 					</div>
-					<div className="card col-md-6 col-sm-12 d-flex justify-content-center mb-5 ">
+					<div
+						className="card col-lg-5 col-md-6 col-sm-12 d-flex justify-content-center mb-5 "
+						id="CardTwo"
+					>
+						<img
+							src={require("./pictures/ProPic.jpg")}
+							className="card-img-top"
+							alt="..."
+							id="pictureTwo"
+						/>
 						<div className="card-body text-center text-black">
-							<i className="fa-solid fa-glasses fa-6x text-center my-3 "></i>
-
 							<h2 className="card-title mb-4">Card Title</h2>
 							<p className="card-text">
 								Our Mission is to help the community out by helping people with
@@ -115,6 +120,7 @@ const Home = ({ setAuth }) => {
 						</div>
 					</div>
 				</div>
+				{/* <DoughnutChart /> */}
 			</div>
 		</Fragment>
 	);

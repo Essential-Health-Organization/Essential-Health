@@ -81,16 +81,16 @@
 	}
 	td {
 		padding: 0 15px;
-		font-size: 12px;
+		font-size: 14px;
 	}
 	th {
-		font-size: 12px;
+		font-size: 14px;
 	}
 }
 
 @media only screen and (min-width: 3440px) {
 	#table {
-		width: 85em;
+		width: 90em;
 
 		justify-content: center;
 
@@ -98,9 +98,9 @@
 	}
 	td {
 		padding: 0 15px;
-		font-size: 14px;
+		font-size: 18px;
 	}
 	th {
-		font-size: 14px;
+		font-size: 18px;
 	}
 }

@@ -4,13 +4,6 @@
 	box-sizing: border-box;
 }
 
-.sectionTwo {
-	background-color: cadetblue;
-	height: 17rem;
-	margin-top: 50px;
-	margin-bottom: 150px;
-	position: absolute;
-}
 .btn {
 	background-color: #f3969a !important;
 }
@@ -29,7 +22,74 @@
 		font-size: 4em;
 	}
 }
+#pictureOne {
+	width: 25em;
+	height: 15em;
+	margin: 1em auto;
+}
+#pictureTwo {
+	width: 25em;
+	height: 15em;
+	margin: 1em auto;
+}
 
+#CardOne {
+	background-color: #56cc9d;
+}
+
+#CardTwo {
+	background-color: #56cc9d;
+}
+@media only screen and (max-width: 575.98px) {
+	#pictureOne {
+		width: 17em;
+		height: 11em;
+		margin: 1em auto;
+	}
+	#pictureTwo {
+		width: 17em;
+		height: 11em;
+		margin: 1em auto;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#pictureOne {
+		width: 18em;
+		height: 12em;
+		margin: 1em auto;
+	}
+	#pictureTwo {
+		width: 18em;
+		height: 12em;
+		margin: 1em auto;
+	}
+}
+@media only screen and (max-width: 991.98px) {
+	#pictureOne {
+		width: 18em;
+		height: 12em;
+		margin: 1em auto;
+	}
+	#pictureTwo {
+		width: 18em;
+		height: 12em;
+		margin: 1em auto;
+	}
+}
+
+@media only screen and (max-width: 1199.98px) {
+	#pictureOne {
+		width: 18em;
+		height: 12em;
+		margin: 1em auto;
+	}
+	#pictureTwo {
+		width: 18em;
+		height: 12em;
+		margin: 1em auto;
+	}
+}
 /* #home {
 	border-style: hidden;
 	padding: 5vh 5vw;
