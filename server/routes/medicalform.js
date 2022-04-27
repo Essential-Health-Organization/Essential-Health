@@ -27,8 +27,33 @@ router.post("/:user_id", authorization, async (req, res) => {
 		console.error(err.message);
 	}
 });
-//update medical info
-router.put("/update/:user_id", authorization, async (req, res) => {
+// //update medical info
+// router.put("/update/:user_id", authorization, async (req, res) => {
+// 	try {
+// 		const result = await pool.query(
+// 			"UPDATE medical_info SET any_medication = $1, medication_description = $2, insurance = $3 WHERE user_id = $4 RETURNING * ",
+// 			[
+// 				req.body.any_medication,
+// 				req.body.medication_description,
+// 				req.body.insurance,
+// 				req.params.user_id,
+// 			]
+// 		);
+
+// 		console.log(req.body);
+
+// 		res.status(200).json({
+// 			status: "success",
+// 			data: {
+// 				medical_information: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
+router.put("/update/:userId", authorization, async (req, res) => {
+	console.log("Request Data:", req.body);
 	try {
 		const result = await pool.query(
 			"UPDATE medical_info SET any_medication = $1, medication_description = $2, insurance = $3 WHERE user_id = $4 RETURNING * ",
@@ -36,12 +61,12 @@ router.put("/update/:user_id", authorization, async (req, res) => {
 				req.body.any_medication,
 				req.body.medication_description,
 				req.body.insurance,
-				req.params.user_id,
+				req.params.userId,
 			]
 		);
 
 		console.log(req.body);
-
+		console.log("New Row:", result.rows[0]);
 		res.status(200).json({
 			status: "success",
 			data: {
