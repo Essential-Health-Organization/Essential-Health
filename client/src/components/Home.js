@@ -157,19 +157,24 @@ const Home = ({ setAuth }) => {
 						</div>
 					</div>
 				</div>
-				<div>
-					<svg viewBox="0 0 450 350">
-						<g transform={"translate(0, -75)"}>
-							<VictoryPie
-								colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
-								name="pie"
-								width={350}
-								standalone={false}
-								style={{ labels: { fontSize: 25, padding: 10 } }}
-								data={piedataresults}
-							/>
-						</g>
-					</svg>
+				<div className="row " id="piechartrow">
+					<div className="col" id="piechartcol">
+						<svg viewBox="0 0 450 350" id="piechart">
+							<g transform={"translate(0, -75)"}>
+								<VictoryPie
+									colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
+									name="pie"
+									width={350}
+									innerRadius={75}
+									standalone={false}
+									style={{
+										labels: { fill: "white", fontSize: 10, padding: 10 },
+									}}
+									data={piedataresults}
+								/>
+							</g>
+						</svg>
+					</div>
 				</div>
 			</div>
 		</div>
