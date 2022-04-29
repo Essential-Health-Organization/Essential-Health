@@ -2,6 +2,9 @@ import React, { Fragment, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "./pagecss/results.css";
 
+// import * as V from "victory";
+// import { VictoryPie } from "victory";
+
 // import "./pagecss/home.css";
 //import "./pagecss/results.css"
 const Results = (props) => {
@@ -33,6 +36,7 @@ const Results = (props) => {
 			console.error(err.message);
 		}
 	}
+
 	//going to make a request when we get to this component, this is for getting from database
 	useEffect(() => {
 		getResults();
@@ -89,6 +93,24 @@ const Results = (props) => {
 					))}
 				</tbody>
 			</table>
+			{/* <div>
+				<svg viewBox="0 0 450 350">
+					<g transform={"translate(0, -75)"}>
+						<VictoryPie
+							name="pie"
+							width={350}
+							standalone={false}
+							style={{ labels: { fontSize: 25, padding: 10 } }}
+							data={[
+								{ x: "a", y: 3 },
+								{ x: "b", y: 4 },
+								{ x: "c", y: 5 },
+								{ x: "d", y: 7 },
+							]}
+						/>
+					</g>
+				</svg>
+			</div> */}
 		</Fragment>
 	);
 };

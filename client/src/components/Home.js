@@ -1,12 +1,19 @@
 import React, { Fragment, useState, useEffect } from "react";
-import DoughnutChart from "./DoughnutChart";
+//import DoughnutChart from "./DoughnutChart";
+//import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 //import { toast } from "react-toastify";
 import "./pagecss/home.css";
+import * as V from "victory";
+import { VictoryPie } from "victory";
+// import pieChartBasic from "./DoughnutChart";
+// import { Doughnut } from "react-chartjs-2";
 // import { FontAwesomeIcon } from "@fontawesome-free-solid";
 // import { encryptStorage } from "./encrypt";
 const Home = ({ setAuth }) => {
 	const [username, setUsername] = useState("");
 	const [user_id, setuserid] = useState("");
+	const [occ, setOcc] = useState([]);
 	// const [personalForm, setpersonalForm] = useState([]);//
 	// const [Pform, setform] = useState(false);
 	async function getUsername() {
@@ -27,6 +34,22 @@ const Home = ({ setAuth }) => {
 		} catch (err) {
 			console.error(err.message);
 		}
+
+		try {
+			const response = await fetch("http://localhost:4001/results/occ", {
+				method: "GET",
+				//pass token with localstorage because it is stored in the header
+				headers: { token: localStorage.token },
+			});
+
+			const parseRes = await response.json();
+			// setpersonalForm(parseData);
+			setOcc(parseRes.data.occupationResults);
+
+			console.log(parseRes.data.occupationResults);
+		} catch (err) {
+			console.error(err.message);
+		}
 	}
 
 	//going to make a request when we get to this component, this is for getting from database
@@ -34,8 +57,22 @@ const Home = ({ setAuth }) => {
 		getUsername();
 	}, []);
 
+	// 	const PIEDATAVALUES = occ.map((occupation) =>
+	// 		{ "x"= occupation.occupation,
+	// 		  "y"= occupation.values
+	// 		},
+	// );
+	// console.log(PIEDATAVALUES);
+
+	const result = [];
+	const piedataresults = occ.reduce((a, item) => {
+		result.push({ x: item.occupation, y: item.values });
+		return result;
+	}, []);
+	//console.log(piedataresults);
+
 	return (
-		<Fragment>
+		<div>
 			<div className="container">
 				<div className="row">
 					<div className="col-md-4 col-sm-12 d-flex justify-content-center">
@@ -120,9 +157,22 @@ const Home = ({ setAuth }) => {
 						</div>
 					</div>
 				</div>
-				{/* <DoughnutChart /> */}
+				<div>
+					<svg viewBox="0 0 450 350">
+						<g transform={"translate(0, -75)"}>
+							<VictoryPie
+								colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
+								name="pie"
+								width={350}
+								standalone={false}
+								style={{ labels: { fontSize: 25, padding: 10 } }}
+								data={piedataresults}
+							/>
+						</g>
+					</svg>
+				</div>
 			</div>
-		</Fragment>
+		</div>
 	);
 };
 
