@@ -6,7 +6,7 @@ export default function Footer() {
 			<div className="container">
 				<div className="row ">
 					<div className="col footercol mx-auto text-white mt-2 ">
-						<h4 className="text-center">Company</h4>
+						<h4 className="text-center">EH</h4>
 						<ul className="list-unstyled text-center">
 							<li>About Us</li>
 							<li>Contact Us</li>

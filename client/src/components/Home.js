@@ -78,11 +78,10 @@ const Home = ({ setAuth }) => {
 					<div className="col-md-4 col-sm-12 d-flex justify-content-center">
 						<div className="card-body text-center text-white">
 							<i className="fa-solid fa-bullseye fa-6x  my-3 "></i>
-							<h2 className="card-title mb-4">Card Title</h2>
+							<h2 className="card-title mb-4">Mission</h2>
 
 							<p className="card-text">
-								Our Mission is to help the community out by helping people with
-								mental health issues
+								Helping clients find a therapist with a relatable approach
 							</p>
 						</div>
 					</div>
@@ -90,11 +89,11 @@ const Home = ({ setAuth }) => {
 					<div className="col-md-4 col-sm-12 d-flex justify-content-center">
 						<div className="card-body text-center text-white">
 							<i className="fa-solid fa-glasses fa-6x text-center my-3 "></i>
-							<h2 className="card-title mb-4">Card Title</h2>
+							<h2 className="card-title mb-4">Vision</h2>
 
 							<p className="card-text">
-								Our Mission is to help the community out by helping people with
-								mental health issues
+								A helping hand that can guide a community towards better mental
+								health
 							</p>
 						</div>
 					</div>
@@ -102,14 +101,52 @@ const Home = ({ setAuth }) => {
 					<div className="col-md-4 col-sm-12  d-flex justify-content-center">
 						<div className="card-body text-center text-white pb-4">
 							<i className="fa-solid fa-hand-holding-medical fa-6x text-center my-3 "></i>
-							<h2 className="card-title mb-4">Card Title</h2>
+							<h2 className="card-title mb-4">Values</h2>
 
 							<p className="card-text">
-								Our Mission is to help the community out by helping people with
-								mental health issues
+								Dedicated to providing resources and support no matter the time
+								of day.
 							</p>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div className="row mb-5 " id="piechartrow">
+				<div
+					className="col-md-6 col-sm-12 text-white text-center "
+					id="pietext"
+				>
+					<p id="pietext">
+						There are over 12,000 different occapations in the world. Essential
+						Health is there to provide occupational therapist to anyone that
+						needs it whenever they need it. Here is visual representation of the
+						types of occupation we have at the moment, the list keeps on growing
+						everyday.
+					</p>
+				</div>
+				<div className="col-md-6 col-sm-12 mt-3" id="piechartcol">
+					<svg viewBox="-15 -25 450 350" id="piechart">
+						<g transform={"translate(0, -75)"}>
+							<VictoryPie
+								colorScale={[
+									"#6680FF",
+									"#DFFF00",
+									"#DF4E4F",
+									"#FFB600",
+									"#eeaaaa",
+									"#23B936",
+								]}
+								name="pie"
+								width={350}
+								innerRadius={75}
+								standalone={false}
+								style={{
+									labels: { fill: "white", fontSize: 13, padding: 14 },
+								}}
+								data={piedataresults}
+							/>
+						</g>
+					</svg>
 				</div>
 			</div>
 
@@ -126,14 +163,14 @@ const Home = ({ setAuth }) => {
 							alt="..."
 						/>
 
-						<div className="card-body text-center text-black">
+						<div className="card-body text-center text-white">
 							<h2 className="card-title mb-4">Alexey Aulov</h2>
 							<p className="card-text">
 								Hi my name is Alexey Aulov I am a senior at College of Staten
 								Island studying Information System and Informatics. I had the
 								original idea of Essential Health after I witnessed that
 								sometimes the best way for people to get mental help is to have
-								Therapist that can relate to you as much as possible to help you
+								therapist that can relate to you as much as possible to help you
 								out. Helping people gives me the most gratitude in life.
 							</p>
 						</div>
@@ -143,37 +180,23 @@ const Home = ({ setAuth }) => {
 						id="CardTwo"
 					>
 						<img
-							src={require("./pictures/ProPic.jpg")}
+							src={require("./pictures/JLThree.jpg")}
 							className="card-img-top"
 							alt="..."
 							id="pictureTwo"
 						/>
-						<div className="card-body text-center text-black">
-							<h2 className="card-title mb-4">Card Title</h2>
+						<div className="card-body text-center text-white">
+							<h2 className="card-title mb-4">Jonathan Leibovici</h2>
 							<p className="card-text">
-								Our Mission is to help the community out by helping people with
-								mental health issues
+								Hi my name is Jonathan Leibovici I am also a senior at College
+								of Staten Island studying Information System and Informatics. We
+								had an idea of creating a website that would change peoples view
+								about mental health and how important having a good mental
+								health is. Having a therapist that can relate to you, is
+								extremly beneficial. Helping people find resources that they
+								need is really rewarding on its own.
 							</p>
 						</div>
-					</div>
-				</div>
-				<div className="row " id="piechartrow">
-					<div className="col" id="piechartcol">
-						<svg viewBox="0 0 450 350" id="piechart">
-							<g transform={"translate(0, -75)"}>
-								<VictoryPie
-									colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
-									name="pie"
-									width={350}
-									innerRadius={75}
-									standalone={false}
-									style={{
-										labels: { fill: "white", fontSize: 10, padding: 10 },
-									}}
-									data={piedataresults}
-								/>
-							</g>
-						</svg>
 					</div>
 				</div>
 			</div>
