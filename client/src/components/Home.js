@@ -63,10 +63,19 @@ const Home = ({ setAuth }) => {
 	// 		},
 	// );
 	// console.log(PIEDATAVALUES);
-
+	// const totvalues = [];
 	const result = [];
+	let length = 0;
+	for (let i = 0; i < occ.length; i++) {
+		length += Number(occ[i].values);
+	}
 	const piedataresults = occ.reduce((a, item) => {
-		result.push({ x: item.occupation, y: item.values });
+		// totvalues += item.values;
+		const num = (item.values / length) * 100;
+		result.push({
+			x: item.occupation + `: ${Math.floor(num)} %`,
+			y: item.values,
+		});
 		return result;
 	}, []);
 	//console.log(piedataresults);
@@ -74,7 +83,7 @@ const Home = ({ setAuth }) => {
 	return (
 		<div>
 			<div className="container">
-				<div className="row">
+				<div className="row" id="about">
 					<div className="col-md-4 col-sm-12 d-flex justify-content-center">
 						<div className="card-body text-center text-white">
 							<i className="fa-solid fa-bullseye fa-6x  my-3 "></i>
@@ -125,7 +134,7 @@ const Home = ({ setAuth }) => {
 					</p>
 				</div>
 				<div className="col-md-6 col-sm-12 mt-3" id="piechartcol">
-					<svg viewBox="-15 -25 450 350" id="piechart">
+					<svg viewBox="-55 -25 450 350" id="piechart">
 						<g transform={"translate(0, -75)"}>
 							<VictoryPie
 								colorScale={[
@@ -141,7 +150,7 @@ const Home = ({ setAuth }) => {
 								innerRadius={75}
 								standalone={false}
 								style={{
-									labels: { fill: "white", fontSize: 13, padding: 14 },
+									labels: { fill: "white", fontSize: 12, padding: 14 },
 								}}
 								data={piedataresults}
 							/>
@@ -151,7 +160,7 @@ const Home = ({ setAuth }) => {
 			</div>
 
 			<div className="container-fluid">
-				<div className="row justify-content-around">
+				<div className="row justify-content-around" id="aboutus">
 					<div
 						className="card col-lg-5 col-md-6 col-sm-12  d-flex justify-content-center mb-5 "
 						id="CardOne"

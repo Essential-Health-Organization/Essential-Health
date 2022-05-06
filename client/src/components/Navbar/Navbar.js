@@ -14,6 +14,7 @@ const Navbar = ({ setAuth }) => {
 		e.preventDefault();
 		localStorage.removeItem("token");
 		localStorage.removeItem("user_id");
+		localStorage.removeItem("all");
 		setAuth(false);
 		toast.success("Logged out Successfully!");
 	};

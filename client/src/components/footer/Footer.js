@@ -8,9 +8,21 @@ export default function Footer() {
 					<div className="col footercol mx-auto text-white mt-2 ">
 						<h4 className="text-center">EH</h4>
 						<ul className="list-unstyled text-center">
-							<li>About Us</li>
-							<li>Contact Us</li>
-							<li>Careers</li>
+							<li>
+								<a href="#about" style={{ color: "white" }}>
+									About EH
+								</a>
+							</li>
+							<li href="#piechartrow">
+								<a href="#piechartrow" style={{ color: "white" }}>
+									Faqs
+								</a>
+							</li>
+							<li>
+								<a href="#aboutus" style={{ color: "white" }}>
+									About Us
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

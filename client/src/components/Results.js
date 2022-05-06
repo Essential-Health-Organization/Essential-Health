@@ -1,7 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "./pagecss/results.css";
-
+//  import StarRating from "./StarRating";
+import DetailPage from "./DetailPage";
+import { Link } from "react-router-dom";
 // import * as V from "victory";
 // import { VictoryPie } from "victory";
 
@@ -9,8 +11,13 @@ import "./pagecss/results.css";
 //import "./pagecss/results.css"
 const Results = (props) => {
 	const [username, setUsername] = useState("");
+
 	// const [user_id, setuserid] = useState("");
 	const [results, setResults] = useState([]);
+
+	// for the search bar
+	const [searchTerm, setSearchTerm] = useState("");
+
 	// const [personalForm, setpersonalForm] = useState([]);//
 	// const [Pform, setform] = useState(false);
 	async function getResults() {
@@ -31,6 +38,10 @@ const Results = (props) => {
 			// setuserid(parseRes.user_id); //
 			// const encryptStorage = new EncryptStorage('secret-key');
 			// removed the localstorage user id
+			localStorage.setItem(
+				"all",
+				JSON.stringify(parseRes.data.resource_information)
+			);
 			console.log(parseRes);
 		} catch (err) {
 			console.error(err.message);
@@ -43,56 +54,76 @@ const Results = (props) => {
 	}, []);
 	return (
 		<Fragment>
-			<table
-				className="table table-responsive table-light  text-center text-dark rounded "
-				id="table"
-			>
-				<thead>
-					<tr>
-						<th>Therapist Name</th>
-						<th>Description</th>
-						<th>Email</th>
-						<th>Website</th>
-						<th>Fax</th>
-						<th>Phone Number</th>
-						<th>City</th>
-						<th>State</th>
-						<th>Zip</th>
-					</tr>
-				</thead>
-				<tbody>
-					{/*     <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                    </tr>*/}
-					{results.map((results) => (
-						<tr key={results.user_id}>
-							<td>{results.title}</td>
-							<td>{results.description}</td>
-							<td>{results.email}</td>
-							<td>{results.website}</td>
-							<td>{results.fax}</td>
-							<td>{results.work_phone_number}</td>
-							<td>{results.state}</td>
-							<td>{results.state}</td>
-							<td>{results.zipcode}</td>
-							{/* <td>
+			<div className="container">
+				<div className="form-group" id="searchbar">
+					<input
+						className="form-control"
+						type="text"
+						placeholder="Search ..."
+						onChange={(event) => {
+							setSearchTerm(event.target.value);
+						}}
+					/>
+				</div>
+				<table
+					className="table table-responsive table-light  text-center text-dark rounded "
+					id="table"
+				>
+					<thead>
+						<tr>
+							<th>Therapist Name</th>
+							<th>Description</th>
+							<th>Email</th>
+							<th>Website</th>
+							<th>Fax</th>
+							<th>Phone Number</th>
+							<th>City</th>
+							<th>State</th>
+							<th>Zip</th>
+						</tr>
+					</thead>
+					<tbody>
+						{results
+							.filter((val) => {
+								if (searchTerm == "") {
+									return val;
+								} else if (
+									val.title.toLowerCase().includes(searchTerm.toLowerCase())
+								) {
+									return val;
+								}
+							})
+							.map((results) => (
+								<tr key={results.user_id}>
+									<Link to={"/details"} state={results}>
+										<td>{results.title}</td>
+									</Link>
+									<td>{results.description}</td>
+									<td>{results.email}</td>
+									<td>{results.website}</td>
+									<td>{results.fax}</td>
+									<td>{results.work_phone_number}</td>
+									<td>{results.state}</td>
+									<td>{results.state}</td>
+									<td>{results.zipcode}</td>
+
+									{/* <td>
                             <EditPersonalForm personalForm={personalForm} />
                         </td> */}
-							{/* <td><Editanime anime ={anime} /></td> */}
-							<td>
-								{/* <button
+									{/* <td><Editanime anime ={anime} /></td> */}
+									<td>
+										{/* <button
                                     className="btn btn-danger"
                                     // onClick={() => deleteAnime(anime.anime_id)}
                                 >
                                     Delete
                                 </button> */}
-							</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
+									</td>
+								</tr>
+							))}
+					</tbody>
+				</table>
+			</div>
 			{/* <div>
 				<svg viewBox="0 0 450 350">
 					<g transform={"translate(0, -75)"}>

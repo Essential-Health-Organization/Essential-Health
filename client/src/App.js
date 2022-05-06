@@ -17,12 +17,15 @@ import { encryptStorage } from "../src/components/encrypt";
 import MedicalForm from "./components/MedicalForm";
 import ListPersonalForm from "./components/ListPersonalForm";
 import Results from "./components/Results";
+import DetailPage from "./components/DetailPage";
 import Footer from "./components/footer/Footer";
 
 toast.configure();
 function App() {
 	const [username, setUsername] = useState("");
 	const [user_id, setuserid] = useState("");
+	const [results, setresults] = useState([]);
+
 	// we want to make sure it set to false first
 	const [isAuthenticated, setAuthenticated] = useState(false);
 	//this is going to the be toggle function to set the auth
@@ -55,7 +58,12 @@ function App() {
 		//const value = encryptStorage.decryptString(storedUserID);
 		setuserid(storedUserID); //
 		console.log(storedUserID);
-	});
+
+		const TheRes = localStorage.getItem("all");
+		console.log(TheRes);
+		// //const value = encryptStorage.decryptString(TheRes);
+		setresults(JSON.parse(TheRes));
+	}, []);
 	return (
 		<Fragment>
 			<Router>
@@ -146,6 +154,21 @@ function App() {
 								element={
 									isAuthenticated ? (
 										<Results setAuth={setAuth} user_id={user_id} />
+									) : (
+										<Navigate to="/home" />
+									)
+								}
+							/>
+							<Route
+								exact
+								path="/details"
+								element={
+									isAuthenticated ? (
+										<DetailPage
+											setAuth={setAuth}
+											user_id={user_id}
+											Theprops={results}
+										/>
 									) : (
 										<Navigate to="/home" />
 									)
