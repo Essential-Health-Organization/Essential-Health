@@ -3,7 +3,7 @@ import Message from "./Message";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "./pagecss/register.css";
-
+import { encryptStorage } from "encrypt-storage";
 
 const Register = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
@@ -30,6 +30,7 @@ const Register = ({ setAuth }) => {
 			const parseRes = await response.json();
 			if (parseRes.token) {
 				localStorage.setItem("token", parseRes.token);
+				localStorage.setItem("user_id", parseRes.user_id);
 				setAuth(true);
 				toast.success("Registered Successfully!");
 			} else {

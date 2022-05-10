@@ -2,6 +2,26 @@ const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
 
+router.get("/getting/:user_id", authorization, async (req, res) => {
+	try {
+		const result = await pool.query(
+			"SELECT * FROM medical_info WHERE user_id=$1 ",
+			[req.params.user_id]
+		);
+
+		console.log(req.params);
+
+		res.status(200).json({
+			status: "success",
+			data: {
+				medical_information: result.rows[0], //this gets the one row we need
+			},
+		});
+	} catch (err) {
+		console.error(err.message);
+	}
+});
+
 //insert into medical info
 router.post("/:user_id", authorization, async (req, res) => {
 	try {
@@ -78,24 +98,24 @@ router.put("/update/:userId", authorization, async (req, res) => {
 	}
 });
 //get medical info
-router.get("/getting/:user_id", authorization, async (req, res) => {
-	try {
-		const result = await pool.query(
-			"SELECT * FROM medical_info WHERE user_id=$1 ",
-			[req.params.user_id]
-		);
+// router.get("/getting/:user_id", authorization, async (req, res) => {
+// 	try {
+// 		const result = await pool.query(
+// 			"SELECT * FROM medical_info WHERE user_id=$1 ",
+// 			[req.params.user_id]
+// 		);
 
-		console.log(req.params);
+// 		console.log(req.params);
 
-		res.status(200).json({
-			status: "success",
-			data: {
-				medical_information: result.rows[0], //this gets the one row we need
-			},
-		});
-	} catch (err) {
-		console.error(err.message);
-	}
-});
+// 		res.status(200).json({
+// 			status: "success",
+// 			data: {
+// 				medical_information: result.rows[0], //this gets the one row we need
+// 			},
+// 		});
+// 	} catch (err) {
+// 		console.error(err.message);
+// 	}
+// });
 
 module.exports = router;

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./pagecss/personalform.css";
 const PersonalForm = (props) => {
+	console.log(props);
 	const [username, setUsername] = useState("");
 	const [inputs, setInputs] = useState({
 		first_name: "",
@@ -24,6 +25,7 @@ const PersonalForm = (props) => {
 		state,
 		zip,
 	} = inputs;
+
 	const onChange = (e) => {
 		// take in every input and target the input value of name
 		//like email,username, and password
@@ -31,6 +33,7 @@ const PersonalForm = (props) => {
 	};
 	const onSubmitForm = async (e) => {
 		e.preventDefault();
+		console.log(inputs);
 		try {
 			const body = {
 				first_name,
@@ -74,6 +77,10 @@ const PersonalForm = (props) => {
 		}
 	};
 
+	// useEffect(() => {
+	// 	onSubmitForm();
+	// });
+
 	return (
 		<Fragment>
 			<form
@@ -84,7 +91,6 @@ const PersonalForm = (props) => {
 				<h1 className="my-5">Personal Form</h1>
 				<input
 					type="text"
-					required
 					// this is a name of an input
 					name="first_name"
 					placeholder="First Name..."
@@ -94,7 +100,6 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
-					required
 					name="last_name"
 					placeholder="Last Name..."
 					className="form-control my-3"
@@ -103,7 +108,6 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
-					required
 					name="pronoun"
 					placeholder="pronoun..."
 					className="form-control my-3"
@@ -112,7 +116,6 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
-					required
 					name="occupation"
 					placeholder="Occupation..."
 					className="form-control my-3"
@@ -121,7 +124,6 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
-					required
 					name="phone_number"
 					placeholder="Phone Number..."
 					className="form-control my-3"
@@ -130,7 +132,6 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
-					required
 					name="city"
 					placeholder="City..."
 					className="form-control my-3"
@@ -139,7 +140,6 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
-					required
 					name="state"
 					placeholder="State..."
 					className="form-control my-3"
@@ -148,7 +148,6 @@ const PersonalForm = (props) => {
 				/>
 				<input
 					type="text"
-					required
 					name="zip"
 					placeholder="Zip..."
 					className="form-control my-3"

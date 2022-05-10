@@ -54,7 +54,9 @@ function App() {
 		// this app.js we are doing reading the value user id val that was set in the login comp
 		// and setting the user id value of the app comp to value from what we receive the
 		// encrypt storage
-		const storedUserID = encryptStorage.getItem("user_id");
+		// const storedUserID = localStorage.getItem("user_id");
+
+		const storedUserID = localStorage.getItem("user_id");
 		//const value = encryptStorage.decryptString(storedUserID);
 		setuserid(storedUserID); //
 		console.log(storedUserID);
@@ -63,7 +65,9 @@ function App() {
 		console.log(TheRes);
 		// //const value = encryptStorage.decryptString(TheRes);
 		setresults(JSON.parse(TheRes));
-	}, []);
+	});
+	console.log(user_id);
+
 	return (
 		<Fragment>
 			<Router>
@@ -87,7 +91,7 @@ function App() {
 								path="/login"
 								element={
 									!isAuthenticated ? (
-										<Login setAuth={setAuth} />
+										<Login setAuth={setAuth} user_id={user_id} />
 									) : (
 										<Navigate to="/home" />
 									)
@@ -98,7 +102,7 @@ function App() {
 								path="/register"
 								element={
 									!isAuthenticated ? (
-										<Register setAuth={setAuth} />
+										<Register setAuth={setAuth} user_id={user_id} />
 									) : (
 										<Navigate to="/home" />
 									)

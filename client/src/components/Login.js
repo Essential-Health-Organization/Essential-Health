@@ -32,7 +32,9 @@ const Login = ({ setAuth }) => {
 
 			if (parseRes.token) {
 				localStorage.setItem("token", parseRes.token);
-				encryptStorage.setItem("user_id", parseRes.user_id);
+				// localStorage.setItem("user_id", parseRes.user_id);
+
+				localStorage.setItem("user_id", parseRes.user_id);
 
 				setAuth(true);
 

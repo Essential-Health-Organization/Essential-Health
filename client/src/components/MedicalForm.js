@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./pagecss/medicalform.css";
 const MedicalForm = (props) => {
+	console.log(props);
 	const [username, setUsername] = useState("");
 	const [inputs, setInputs] = useState({
 		any_medication: "",
@@ -53,6 +54,9 @@ const MedicalForm = (props) => {
 			console.error(err.message);
 		}
 	};
+	// useEffect(() => {
+	// 	onSubmitForm();
+	// }, []);
 
 	return (
 		<Fragment>

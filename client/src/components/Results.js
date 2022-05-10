@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "./pagecss/results.css";
-//  import StarRating from "./StarRating";
+import StarRating from "./StarRating";
 import DetailPage from "./DetailPage";
 import { Link } from "react-router-dom";
 // import * as V from "victory";
@@ -47,7 +47,17 @@ const Results = (props) => {
 			console.error(err.message);
 		}
 	}
-
+	const renderRating = (results) => {
+		if (!results.count) {
+			<span className="text-warning ml-1">0 reviews</span>;
+		}
+		return (
+			<>
+				<StarRating rating={results.resource_id} />
+				<span className="text-warning ml-1">({results.count})</span>
+			</>
+		);
+	};
 	//going to make a request when we get to this component, this is for getting from database
 	useEffect(() => {
 		getResults();
@@ -80,6 +90,7 @@ const Results = (props) => {
 							<th>City</th>
 							<th>State</th>
 							<th>Zip</th>
+							<th>Ratingss</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -106,6 +117,7 @@ const Results = (props) => {
 									<td>{results.state}</td>
 									<td>{results.state}</td>
 									<td>{results.zipcode}</td>
+									<td>{renderRating(results)}</td>
 
 									{/* <td>
                             <EditPersonalForm personalForm={personalForm} />

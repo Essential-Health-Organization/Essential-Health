@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 // import { RestaurantsContext } from "../context/RestaurantsContext";
 // import RestaurantFinder from "../apis/RestaurantFinder";
-// import StarRating from "../components/StarRating";
+import StarRating from "../components/StarRating";
 import Reviews from "./Reviews";
 import AddReview from "./AddReview";
 const DetailPage = (props) => {
@@ -40,6 +40,13 @@ const DetailPage = (props) => {
 	return (
 		<div>
 			<>
+				<h1 className="text-center display-1">{location.state.title}</h1>
+				<div className="text-center">
+					<StarRating rating={location.state.average_rating} />
+					<span className="text-warning ml-1">
+						{location.state.count ? `(${location.state.count})` : "(0)"}
+					</span>
+				</div>
 				<div className="mt-3" id="test">
 					<Reviews reviews={selectedTherapist} />
 				</div>

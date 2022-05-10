@@ -43,6 +43,9 @@ app.use("/mform", require("./routes/medicalform"));
 //resources
 app.use("/results", require("./routes/results"));
 
+//reviews
+app.use("/", require("./routes/Reviews"));
+
 // inserting into medical information GOOD
 app.post("/api/v1/MForm/:username", async (req, res) => {
 	try {

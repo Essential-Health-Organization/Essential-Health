@@ -2,7 +2,6 @@ const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
 
-
 router.get("/occ", authorization, async (req, res) => {
 	try {
 		console.log(req);
@@ -28,11 +27,13 @@ router.get("/occ", authorization, async (req, res) => {
 router.get("/:user_id", authorization, async (req, res) => {
 	try {
 		const result = await pool.query(
-			"SELECT * FROM resources INNER JOIN personal_info on resources.state=personal_info.state AND resources.occupation=personal_info.occupation WHERE user_id= $1;",
+			// "SELECT * FROM resources INNER JOIN personal_info on resources.state=personal_info.state AND resources.occupation=personal_info.occupation WHERE user_id= $1;",
+
+			"SELECT * FROM resources left join (select resource_id, count(*),trunc(avg(rating),1) as average_rating from reviews group by resource_id) reviews on resources.resource_id = reviews.resource_id LEFT JOIN personal_info on resources.state=personal_info.state AND resources.occupation=personal_info.occupation WHERE user_id=$1;",
 			[req.params.user_id]
 		);
 
-		console.log(req.params);
+		console.log("This is getting occupation", req.params);
 
 		res.status(200).json({
 			status: "success",
@@ -44,7 +45,5 @@ router.get("/:user_id", authorization, async (req, res) => {
 		console.error(err.message);
 	}
 });
-
-// SELECT COUNT(occupation),occupation FROM resources GROUP BY occupation;
 
 module.exports = router;

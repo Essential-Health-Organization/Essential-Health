@@ -1,9 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 const AddReview = () => {
+	const location = useLocation();
+	console.log(location.state.resource_id);
+	// const {id} = useParams()
+	// console.log(props)
+	const navigate = useNavigate();
 	const [name, setName] = useState("");
 	const [reviewText, setReviewText] = useState("");
 	const [rating, setRating] = useState("Rating");
+	const handleSubmitReview = async (e) => {
+		// e.preventDefault();
+		try {
+			const body = {
+				name,
+				// resource,
+				review: reviewText,
+				rating,
+			};
+			const response = await fetch(
+				`http://localhost:4001/reviews/${location.state.resource_id}`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						token: localStorage.token,
+					},
+					body: JSON.stringify(body),
+				}
+			);
+			// navigate("/");
+			navigate(location.pathname);
+			const parseRes = await response.json();
+			console.log("this is parseRes", parseRes);
+		} catch (err) {
+			console.error(err.message);
+		}
+	};
+	useEffect(() => {
+		handleSubmitReview();
+	}, []);
+
 	return (
 		<div className="mt-4">
 			<form action="">
@@ -45,7 +84,13 @@ const AddReview = () => {
 						className="form-control"
 					></textarea>
 				</div>
-				<button className="btn btn-primary mt-3">Submit</button>
+				<button
+					type="submit"
+					onClick={handleSubmitReview}
+					className="btn btn-primary mt-3"
+				>
+					Submit
+				</button>
 			</form>
 		</div>
 	);
