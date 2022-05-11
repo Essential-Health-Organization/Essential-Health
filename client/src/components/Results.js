@@ -26,8 +26,12 @@ const Results = (props) => {
 				`http://localhost:4001/results/${props.user_id}`,
 				{
 					method: "GET",
+
 					//pass token with localstorage because it is stored in the header
-					headers: { token: localStorage.token },
+					headers: {
+						"Content-Type": "application/json",
+						token: localStorage.token,
+					},
 				}
 			);
 			const parseRes = await response.json();
@@ -42,6 +46,11 @@ const Results = (props) => {
 				"all",
 				JSON.stringify(parseRes.data.resource_information)
 			);
+			if (parseRes.token) {
+				localStorage.setItem("token", parseRes.token);
+			} else {
+				toast.error(parseRes);
+			}
 			console.log(parseRes);
 		} catch (err) {
 			console.error(err.message);
@@ -53,7 +62,7 @@ const Results = (props) => {
 		}
 		return (
 			<>
-				<StarRating rating={results.resource_id} />
+				<StarRating rating={results.average_rating} />
 				<span className="text-warning ml-1">({results.count})</span>
 			</>
 		);
@@ -61,7 +70,7 @@ const Results = (props) => {
 	//going to make a request when we get to this component, this is for getting from database
 	useEffect(() => {
 		getResults();
-	}, []);
+	}, [searchTerm]);
 	return (
 		<Fragment>
 			<div className="container">
@@ -90,7 +99,7 @@ const Results = (props) => {
 							<th>City</th>
 							<th>State</th>
 							<th>Zip</th>
-							<th>Ratingss</th>
+							<th>Ratings</th>
 						</tr>
 					</thead>
 					<tbody>

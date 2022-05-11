@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
-router.post("/reviews/:resource", authorization, async (req, res) => {
+router.post("/reviews/:resource_id", async (req, res) => {
 	try {
 		const result = await pool.query(
 			"INSERT INTO reviews (resource_id,name,review,rating) VALUES ($1,$2,$3,$4) RETURNING *",
@@ -18,7 +18,7 @@ router.post("/reviews/:resource", authorization, async (req, res) => {
 		console.error(err.message);
 	}
 });
-router.get("/Getreviews/:resource_id", authorization, async (req, res) => {
+router.get("/Getreviews/:resource_id", async (req, res) => {
 	try {
 		// "SELECT * FROM reviews WHERE resource_id = $1";
 

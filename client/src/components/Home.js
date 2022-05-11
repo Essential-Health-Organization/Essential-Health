@@ -10,7 +10,7 @@ import { VictoryPie } from "victory";
 // import { Doughnut } from "react-chartjs-2";
 // import { FontAwesomeIcon } from "@fontawesome-free-solid";
 // import { encryptStorage } from "./encrypt";
-const Home = ({ setAuth }) => {
+const Home = () => {
 	const [username, setUsername] = useState("");
 	const [user_id, setuserid] = useState("");
 	const [occ, setOcc] = useState([]);

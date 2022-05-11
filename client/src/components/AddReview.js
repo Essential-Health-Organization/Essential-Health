@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import Reviews from "./Reviews";
 // import { useHistory } from "react-router-dom";
-const AddReview = () => {
+const AddReview = ({ updatePage }) => {
 	const location = useLocation();
 	console.log(location.state.resource_id);
 	// const {id} = useParams()
 	// console.log(props)
-	const navigate = useNavigate();
+
 	const [name, setName] = useState("");
 	const [reviewText, setReviewText] = useState("");
 	const [rating, setRating] = useState("Rating");
+
 	const handleSubmitReview = async (e) => {
-		// e.preventDefault();
+		e.preventDefault();
 		try {
 			const body = {
 				name,
@@ -32,8 +34,12 @@ const AddReview = () => {
 				}
 			);
 			// navigate("/");
-			navigate(location.pathname);
+			// navigate(location.pathname);
 			const parseRes = await response.json();
+			updatePage(name, reviewText, rating);
+			setName("");
+			setReviewText("");
+			setRating("Rating");
 			console.log("this is parseRes", parseRes);
 		} catch (err) {
 			console.error(err.message);
@@ -41,6 +47,7 @@ const AddReview = () => {
 	};
 	useEffect(() => {
 		handleSubmitReview();
+		console.log("add review component");
 	}, []);
 
 	return (
@@ -48,7 +55,9 @@ const AddReview = () => {
 			<form action="">
 				<div className="row">
 					<div className="form-group col-8">
-						<label htmlFor="name">Name</label>
+						<label htmlFor="name" className="text-white">
+							Name
+						</label>
 						<input
 							value={name}
 							onChange={(e) => setName(e.target.value)}
@@ -58,8 +67,10 @@ const AddReview = () => {
 							className="form-control"
 						/>
 					</div>
-					<div className="form-group mt-4 col-4">
-						<label htmlFor="rating">Rating</label>
+					<div className="form-group  col-4">
+						<label htmlFor="rating" className="text-white">
+							Rating
+						</label>
 						<select
 							value={rating}
 							onChange={(e) => setRating(e.target.value)}
@@ -76,12 +87,15 @@ const AddReview = () => {
 					</div>
 				</div>
 				<div className="form-group">
-					<label htmlFor="Review">Review</label>
+					<label htmlFor="Review" className="text-white">
+						Review
+					</label>
 					<textarea
 						value={reviewText}
+						placeholder="Text..."
 						onChange={(e) => setReviewText(e.target.value)}
 						id="Review"
-						className="form-control"
+						className="form-control "
 					></textarea>
 				</div>
 				<button

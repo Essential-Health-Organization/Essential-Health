@@ -29,6 +29,7 @@ const PersonalForm = (props) => {
 	const onChange = (e) => {
 		// take in every input and target the input value of name
 		//like email,username, and password
+
 		setInputs({ ...inputs, [e.target.name]: e.target.value });
 	};
 	const onSubmitForm = async (e) => {
@@ -58,18 +59,19 @@ const PersonalForm = (props) => {
 				}
 			);
 			const parseRes = await response.json();
-
+			toast.success("succesfully submited personal form");
 			setUsername(parseRes.username);
 			if (parseRes.token) {
 				// we want to save the token to our local storage
 				localStorage.setItem("token", parseRes.token);
 				console.log(parseRes);
+				// toast.success("succesfully submited personal form");
 				//now we want to setAuth to true
-				props.setAuth(true);
-				toast.success("submit succesfully"); // then use toastify
+				// props.setAuth(true);
+				// then use toastify
 			} else {
 				// if false
-				props.setAuth(false); // set auth to false
+				// props.setAuth(false); // set auth to false
 				toast.error(parseRes); // set the toast to send and error
 			}
 		} catch (err) {

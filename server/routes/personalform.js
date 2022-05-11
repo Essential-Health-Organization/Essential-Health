@@ -2,7 +2,7 @@ const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
 // insert user info
-router.post("/:user_id", authorization, async (req, res) => {
+router.post("/:user_id", async (req, res) => {
 	//console.log("Request Data:", req.data);
 	try {
 		const result = await pool.query(
@@ -31,7 +31,7 @@ router.post("/:user_id", authorization, async (req, res) => {
 	}
 });
 //update user info
-router.put("/update/:userId", authorization, async (req, res) => {
+router.put("/update/:userId", async (req, res) => {
 	console.log("Request Data:", req.body);
 	try {
 		const result = await pool.query(
@@ -60,7 +60,7 @@ router.put("/update/:userId", authorization, async (req, res) => {
 	}
 });
 //get back user info
-router.get("/getting/:user_id", authorization, async (req, res) => {
+router.get("/getting/:user_id", async (req, res) => {
 	try {
 		const result = await pool.query(
 			"SELECT * FROM personal_info WHERE user_id=$1 ",

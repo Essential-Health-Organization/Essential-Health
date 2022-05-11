@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Message from "./Message";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -48,6 +48,7 @@ const Login = ({ setAuth }) => {
 			console.error(err.message);
 		}
 	};
+
 	return (
 		<Fragment>
 			<div className="container-fluid" id="loginform">

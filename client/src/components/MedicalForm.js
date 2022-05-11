@@ -25,7 +25,7 @@ const MedicalForm = (props) => {
 		console.log(inputs);
 		try {
 			const body = { any_medication, medication_description, insurance };
-
+			toast.success("succesfully submited medical form");
 			const response = await fetch(
 				`http://localhost:4001/mform/${props.user_id}`,
 				{
@@ -45,9 +45,10 @@ const MedicalForm = (props) => {
 			if (parseRes.token) {
 				localStorage.setItem("token", parseRes.token);
 				console.log(parseRes);
-				props.setAuth(true);
+				// toast.success("succesfully submited medical form");
+				// props.setAuth(true);
 			} else {
-				props.setAuth(false);
+				// props.setAuth(false);
 				toast.error(parseRes);
 			}
 		} catch (err) {

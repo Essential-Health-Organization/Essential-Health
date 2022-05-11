@@ -2,7 +2,7 @@ const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
 
-router.get("/getting/:user_id", authorization, async (req, res) => {
+router.get("/getting/:user_id",async (req, res) => {
 	try {
 		const result = await pool.query(
 			"SELECT * FROM medical_info WHERE user_id=$1 ",
@@ -23,7 +23,7 @@ router.get("/getting/:user_id", authorization, async (req, res) => {
 });
 
 //insert into medical info
-router.post("/:user_id", authorization, async (req, res) => {
+router.post("/:user_id", async (req, res) => {
 	try {
 		const result = await pool.query(
 			"INSERT INTO medical_info (user_id,any_medication,medication_description,insurance) VALUES($1,$2,$3,$4) RETURNING * ",
@@ -72,7 +72,7 @@ router.post("/:user_id", authorization, async (req, res) => {
 // 		console.error(err.message);
 // 	}
 // });
-router.put("/update/:userId", authorization, async (req, res) => {
+router.put("/update/:userId", async (req, res) => {
 	console.log("Request Data:", req.body);
 	try {
 		const result = await pool.query(

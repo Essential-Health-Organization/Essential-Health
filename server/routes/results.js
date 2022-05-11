@@ -2,7 +2,7 @@ const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
 
-router.get("/occ", authorization, async (req, res) => {
+router.get("/occ", async (req, res) => {
 	try {
 		console.log(req);
 		const result = await pool.query(
@@ -24,7 +24,7 @@ router.get("/occ", authorization, async (req, res) => {
 	}
 });
 
-router.get("/:user_id", authorization, async (req, res) => {
+router.get("/:user_id", async (req, res) => {
 	try {
 		const result = await pool.query(
 			// "SELECT * FROM resources INNER JOIN personal_info on resources.state=personal_info.state AND resources.occupation=personal_info.occupation WHERE user_id= $1;",

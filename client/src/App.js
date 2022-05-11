@@ -50,6 +50,7 @@ function App() {
 	}
 	useEffect(() => {
 		isAuth();
+
 		//in the login comp we are setting user id
 		// this app.js we are doing reading the value user id val that was set in the login comp
 		// and setting the user id value of the app comp to value from what we receive the
@@ -65,7 +66,7 @@ function App() {
 		console.log(TheRes);
 		// //const value = encryptStorage.decryptString(TheRes);
 		setresults(JSON.parse(TheRes));
-	});
+	}, [user_id, isAuthenticated, results]);
 	console.log(user_id);
 
 	return (
@@ -113,8 +114,10 @@ function App() {
 								path="/home"
 								element={
 									isAuthenticated ? (
-										<Home setAuth={setAuth} user_id={user_id} />
+										<Home user_id={user_id} />
 									) : (
+										// <Home setAuth={setAuth} user_id={user_id} />
+
 										<Navigate to="/login" />
 									)
 								}
@@ -124,8 +127,9 @@ function App() {
 								path="/pform"
 								element={
 									isAuthenticated ? (
-										<PersonalForm setAuth={setAuth} user_id={user_id} />
+										<PersonalForm user_id={user_id} />
 									) : (
+										// <PersonalForm setAuth={setAuth} user_id={user_id} />
 										<Navigate to="/home" />
 									)
 								}
@@ -135,8 +139,9 @@ function App() {
 								path="/mform"
 								element={
 									isAuthenticated ? (
-										<MedicalForm setAuth={setAuth} user_id={user_id} />
+										<MedicalForm user_id={user_id} />
 									) : (
+										// <MedicalForm setAuth={setAuth} user_id={user_id} />
 										<Navigate to="/home" />
 									)
 								}
@@ -146,8 +151,9 @@ function App() {
 								path="/profile"
 								element={
 									isAuthenticated ? (
-										<ListPersonalForm setAuth={setAuth} user_id={user_id} />
+										<ListPersonalForm user_id={user_id} />
 									) : (
+										// <ListPersonalForm setAuth={setAuth} user_id={user_id} />
 										<Navigate to="/home" />
 									)
 								}
@@ -157,8 +163,9 @@ function App() {
 								path="/results"
 								element={
 									isAuthenticated ? (
-										<Results setAuth={setAuth} user_id={user_id} />
+										<Results user_id={user_id} />
 									) : (
+										// <Results setAuth={setAuth} user_id={user_id} />
 										<Navigate to="/home" />
 									)
 								}
@@ -169,7 +176,7 @@ function App() {
 								element={
 									isAuthenticated ? (
 										<DetailPage
-											setAuth={setAuth}
+											// setAuth={setAuth}
 											user_id={user_id}
 											Theprops={results}
 										/>
