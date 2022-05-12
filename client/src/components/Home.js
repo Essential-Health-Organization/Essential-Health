@@ -120,6 +120,16 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
+			<div className="row mb-5 text-center text-white" id="piechartrow">
+				<p id="pietext">
+					Essential Health provides therapist to you based on occupation as well
+					as location. When you submit your personal form we have the ability to
+					match you based on what your input is. Also on the results section
+					your able to navigate through the available therapist on the list.
+					Lastly you are able to leave a review for any therapist that you have
+					used.
+				</p>
+			</div>
 			<div className="row mb-5 " id="piechartrow">
 				<div
 					className="col-md-6 col-sm-12 text-white text-center "
